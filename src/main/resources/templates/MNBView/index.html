@@ -4,5 +4,22 @@
       layout:decorate="~{Shared/layout}"
       lang="en"
 ><main layout:fragment="content">
-  <h1>Ez a SOAP fomenu</h1>
+  <form method="get" th:action="@{/soap/search}" th:object="${currency}">
+    <div>
+      <label>Currency: </label>
+      <br>
+      <select th:field="*{name}">
+        <option th:each="curr : ${availableCurrencies}" th:value="${curr}" th:text="${curr}"></option>
+      </select>
+    </div>
+    <div>
+      <label>Start Date:</label>
+      <input type="date" th:field="*{startDate}">
+    </div>
+    <div>
+      <label>End Date:</label>
+      <input type="date" th:field="*{endDate}">
+    </div>
+    <button type="submit">Search</button>
+  </form>
 </main></html>
