@@ -4,5 +4,32 @@
         layout:decorate="~{Shared/layout}"
         lang="en"
 ><main layout:fragment="content">
-
-</main></html>
+    <th:block th:if="${points.size() > 0}">
+        <canvas id="diagram"></canvas>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script th:inline="javascript">
+            const points = /*[[${points}]]*/ [];
+            const labels = points.map(p => p.x);
+            const values = points.map(p => p.y);
+            new Chart(document.getElementById('diagram'), {
+                type: 'line',
+                data: {
+                    labels,
+                    datasets: [{
+                        label: [[${currencyName}]] + "'s Rating on the selected interval",
+                        data: values,
+                        borderColor: '#1976d2',
+                        backgroundColor: 'rgba(25,118,210,0.15)',
+                        fill: true,
+                        tension: 0.2
+                    }]
+                }
+            });
+        </script>
+    </th:block>
+    <th:block th:if="${points.size() == 0}">
+        <h3>There is no data about <b th:text="${currencyName}"></b> according to the MNB on that interval.</h3>
+    </th:block>
+    <a th:href="@{/soap}">Back to search</a>
+</main>
+</html>

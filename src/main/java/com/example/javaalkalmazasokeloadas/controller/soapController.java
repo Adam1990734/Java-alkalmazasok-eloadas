@@ -64,8 +64,13 @@ public class soapController {
                 currencyData.getName()
         );
         var result = currencyRateXmlToLookUp(currencyRate);
-        model.addAttribute("currancyRate", result);
-        //Már csak charjs mert egy dicionary-ben benne vannak Localdate kulcsal szóval jól szűrhető
+        var points = result.entrySet()
+                .stream()
+                .map(e -> Map.of(
+                        "x", e.getKey().toString(),
+                        "y", e.getValue())).toList();
+        model.addAttribute("currencyName", currencyData.getName());
+        model.addAttribute("points", points);
         return "MNBView/result";
     }
 }
