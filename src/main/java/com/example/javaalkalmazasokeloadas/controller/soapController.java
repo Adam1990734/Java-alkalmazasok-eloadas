@@ -9,7 +9,9 @@ import soapMNBClient.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,6 +32,19 @@ public class soapController {
             currencies.add(matcher.group(1));
         return currencies;
     }
+    public Map<LocalDate, Float> currencyRateXmlToLookUp(String currencyRateXML) {
+        Pattern datePattern = Pattern.compile("<Day date=\"(.*?)\">");
+        Matcher dateMacher = datePattern.matcher(currencyRateXML);
+        Pattern ratePattern = Pattern.compile(">([0-9]*,[0-9]*)</Rate>");
+        Matcher rateMacher = ratePattern.matcher(currencyRateXML);
+        Map<LocalDate, Float> map = new HashMap<>();
+        while(dateMacher.find() && rateMacher.find()) {
+            var date = LocalDate.parse(dateMacher.group(1), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            var rate = Float.parseFloat(rateMacher.group(1).replace(',', '.'));
+            map.put(date, rate);
+        }
+        return map;
+    }
 
     @GetMapping
     public String index(Model model) throws MNBArfolyamServiceSoapGetCurrenciesStringFaultFaultMessage {
@@ -48,8 +63,9 @@ public class soapController {
                 currencyData.getEndDate().format(DateTimeFormatter.ofPattern("yyyy.MM.dd")),
                 currencyData.getName()
         );
-        //Ez jó de még a kimenet html és diagramm kell és persze az xml-ből rendes típus kéne
-        model.addAttribute("currancyRate", currencyData);
+        var result = currencyRateXmlToLookUp(currencyRate);
+        model.addAttribute("currancyRate", result);
+        //Már csak charjs mert egy dicionary-ben benne vannak Localdate kulcsal szóval jól szűrhető
         return "MNBView/result";
     }
 }
