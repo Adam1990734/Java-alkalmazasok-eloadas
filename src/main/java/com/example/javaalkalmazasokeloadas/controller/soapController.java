@@ -1,10 +1,12 @@
 package com.example.javaalkalmazasokeloadas.controller;
 
 import com.example.javaalkalmazasokeloadas.model.mnb.CurrencyData;
+import com.soapMNBClient.MNBArfolyamServiceSoap;
+import com.soapMNBClient.MNBArfolyamServiceSoapGetCurrenciesStringFaultFaultMessage;
+import com.soapMNBClient.MNBArfolyamServiceSoapGetExchangeRatesStringFaultFaultMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import soapMNBClient.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

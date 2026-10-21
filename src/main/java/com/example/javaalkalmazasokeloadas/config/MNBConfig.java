@@ -2,8 +2,8 @@ package com.example.javaalkalmazasokeloadas.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import soapMNBClient.MNBArfolyamServiceSoap;
-import soapMNBClient.MNBArfolyamServiceSoapImpl;
+import com.soapMNBClient.MNBArfolyamServiceSoap;
+import com.soapMNBClient.MNBArfolyamServiceSoapImpl;
 
 @Configuration
 public class MNBConfig {
