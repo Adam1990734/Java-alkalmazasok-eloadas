@@ -12,6 +12,13 @@
                 <option th:each="inst : ${availableInstruments}" th:value="${inst}" th:text="${inst}"></option>
             </select>
         </div>
+        <div>
+            <label>Choose granularity (if relevant):</label> <br>
+            <select th:field="*{granularity}">
+                <option th:each="gran : ${availableGranularities}" th:value="${gran}" th:text="${gran}"></option>
+            </select>
+        </div>
     </form>
     <button type="submit" form="instrumentPickerForm" th:formaction="@{/forex/actprice}">ActualPrice</button>
+    <button type="submit" form="instrumentPickerForm" th:formaction="@{/forex/histprice}">HistoricalPrice</button>
 </main></html>

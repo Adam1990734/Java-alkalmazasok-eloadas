@@ -1,0 +1,21 @@
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{shared/layout}"
+        lang="en"
+><main layout:fragment="content">
+    <h2>The last 10 historical price of <b th:text="${prices.getFirst().getName()}"></b>:</h2>
+    <div>
+        <div th:each="price : ${prices}">
+            <div>
+                <span>Date: </span>
+                <span th:text="${price.dateTime}"></span>
+            </div>
+            <div>
+                <span>Price on close: </span>
+                <span th:text="${price.mid}"></span>
+            </div>
+            <hr>
+        </div>
+    </div>
+</main></html>

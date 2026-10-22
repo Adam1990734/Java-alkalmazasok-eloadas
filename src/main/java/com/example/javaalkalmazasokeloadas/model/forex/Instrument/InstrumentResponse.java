@@ -1,4 +1,4 @@
-package com.example.javaalkalmazasokeloadas.model.forex;
+package com.example.javaalkalmazasokeloadas.model.forex.Instrument;
 
 public class InstrumentResponse {
     private String name;
