@@ -1,0 +1,18 @@
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{shared/layout}"
+        lang="en"
+><main layout:fragment="content">
+    <h2>Actual price of: <b th:text="${price.name}"></b></h2>
+    <div>
+        <div>
+            <span>Sell for the market (bid): </span>
+            <span th:text="${price.bid}"></span>
+        </div>
+        <div>
+            <span>Buy from the market (ask): </span>
+            <span th:text="${price.ask}"></span>
+        </div>
+    </div>
+</main></html>

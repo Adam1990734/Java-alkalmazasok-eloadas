@@ -1,0 +1,25 @@
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{shared/layout}"
+        lang="en"
+><main layout:fragment="content">
+    <div>
+        <div>
+            <span th:text="${accountInfo.balance.doubleValue()}"></span>
+        </div>
+        <div>
+            <span th:text="${accountInfo.withdrawLimit.doubleValue()}"></span>
+        </div>
+        <hr>
+        <div>
+            <span th:text="${accountInfo.openTradeCount}"></span>
+        </div>
+        <div>
+            <span th:text="${accountInfo.openPositionCount}"></span>
+        </div>
+        <div>
+            <span th:text="${accountInfo.pendingOrderCount}"></span>
+        </div>
+    </div>
+</main></html>

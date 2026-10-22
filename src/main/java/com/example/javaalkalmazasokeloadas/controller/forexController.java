@@ -34,7 +34,7 @@ public class forexController {
         var info = context.account.summary(
                 apiKeysService.getAccountId()
         ).getAccount();
-        model.addAttribute("", new AccountInfo(
+        model.addAttribute("accountInfo", new AccountInfo(
                 info.getBalance(),
                 info.getWithdrawalLimit(),
                 info.getOpenPositionCount(),
@@ -50,16 +50,16 @@ public class forexController {
             Model model
     ) throws ExecuteException, RequestException {
         var request = new AccountInstrumentsRequest(apiKeysService.getAccountId());
-        var info = context.account.instruments(request);
+        var resp = context.account.instruments(request);
 
         var instruments = new ArrayList<String>();
-        for(var instrument : info.getInstruments()) {
+        for(var instrument : resp.getInstruments()) {
             instruments.add(instrument.getDisplayName());
             if(instruments.size() == len)
                 break;
         }
-        model.addAttribute("", instruments);
-        model.addAttribute("instrument", new InstrumentRequest());
+        model.addAttribute("availableInstruments", instruments);
+        model.addAttribute("chosenInstrument", new InstrumentRequest());
         return "forex/instruments";
     }
 
@@ -72,8 +72,23 @@ public class forexController {
                 apiKeysService.getAccountId(),
                 List.of(instrumentRequest.getName())
         );
-        var info = context.pricing.get(request);
-        //Ezt be kell fejezni!
+        var resp = context.pricing.get(request);
+        model.addAttribute("price",
+                new InstrumentResponse(
+                        instrumentRequest.getName(),
+                        resp.getPrices().getFirst()
+                                .getBids()
+                                .getFirst()
+                                .getPrice()
+                                .doubleValue(),
+                        resp.getPrices()
+                                .getFirst()
+                                .getAsks()
+                                .getFirst()
+                                .getPrice()
+                                .doubleValue()
+                )
+        );
         return "forex/actprice";
     }
 }

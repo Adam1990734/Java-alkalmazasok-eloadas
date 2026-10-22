@@ -102,7 +102,7 @@
                 </wsdlUrls>
                     <packageName>soapMNBClient</packageName>
                     <sourceDestDir>
-                        src/main/java/
+                        src/main/java/com
                     </sourceDestDir>
                 </configuration>
             </plugin>
