@@ -6,6 +6,7 @@ import com.example.javaalkalmazasokeloadas.model.forex.Instrument.InstrumentRequ
 import com.example.javaalkalmazasokeloadas.model.forex.Instrument.InstrumentResponse;
 import com.example.javaalkalmazasokeloadas.model.forex.Position.OpenPositionRequest;
 import com.example.javaalkalmazasokeloadas.model.forex.Position.OpenPositionResponse;
+import com.example.javaalkalmazasokeloadas.model.forex.Position.OpenedPositionResponse;
 import com.example.javaalkalmazasokeloadas.service.ApiKeysService;
 import com.oanda.ExecuteException;
 import com.oanda.RequestException;
@@ -148,5 +149,24 @@ public class forexController {
            openPositionRequest.getUnit()
         ));
         return "forex/openpos";
+    }
+
+    @GetMapping("/openedpos")
+    public String openedPositions(Model model) throws ExecuteException, RequestException {
+        var positions = context.trade.listOpen(apiKeysService.getAccountId()).getTrades();
+        model.addAttribute("openedPositions", positions.stream().map(position ->
+                new OpenedPositionResponse(
+                        position.getId(),
+                        position.getOpenTime(),
+                        position.getInstrument().toString(),
+                        position.getInitialUnits().doubleValue(),
+                        position.getCurrentUnits().doubleValue(),
+                        position.getPrice().doubleValue(),
+                        position.getUnrealizedPL().doubleValue()
+                )
+            ).toList()
+        );
+        //Ezt még be kell fejezni!
+        return "forex/openedpos";
     }
 }
