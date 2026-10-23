@@ -1,0 +1,34 @@
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{shared/layout}"
+        lang="en"
+><main layout:fragment="content">
+    <h2>Opened positions List:</h2>
+    <table th:if="${positions.size() > 0}">
+        <thead>
+            <tr>
+                <th>Instrument</th>
+                <th>Opened At</th>
+                <th>Initial unit</th>
+                <th>Current unit</th>
+                <th>Price</th>
+                <th>UnrealizedPL</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="position : ${positions}">
+                <td th:text="${position.name}"></td>
+                <td th:text="${position.openedAt}"></td>
+                <td th:text="${position.initUnit}"></td>
+                <td th:text="${position.currentUnit}"></td>
+                <td th:text="${position.price}"></td>
+                <td th:text="${position.unrealizedPL}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <div th:if="${positions.size() == 0}">
+        <span>There is no opened positions yet!</span>
+        <p>Open one <a th:href="@{/forex/openpos}">here</a></p>
+    </div>
+</main></html>

@@ -154,7 +154,7 @@ public class forexController {
     @GetMapping("/openedpos")
     public String openedPositions(Model model) throws ExecuteException, RequestException {
         var positions = context.trade.listOpen(apiKeysService.getAccountId()).getTrades();
-        model.addAttribute("openedPositions", positions.stream().map(position ->
+        model.addAttribute("positions", positions.stream().map(position ->
                 new OpenedPositionResponse(
                         position.getId(),
                         position.getOpenTime(),
@@ -166,7 +166,6 @@ public class forexController {
                 )
             ).toList()
         );
-        //Ezt még be kell fejezni!
         return "forex/openedpos";
     }
 }
