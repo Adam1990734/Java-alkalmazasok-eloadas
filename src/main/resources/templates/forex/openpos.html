@@ -1,0 +1,17 @@
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{shared/layout}"
+        lang="en"
+><main layout:fragment="content">
+    <h2>The new opened position for <b th:text="${position.name}"></b>:</h2>
+    <div>
+        <div>
+            <span>TransactionId: </span>
+            <span th:text="${position.id}"></span>
+        </div>
+        <div>
+            <span>Opened with <b th:text="${position.unit}"></b> of units</span>
+        </div>
+    </div>
+</main></html>

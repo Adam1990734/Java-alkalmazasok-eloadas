@@ -4,12 +4,15 @@ import com.example.javaalkalmazasokeloadas.model.forex.AccountInfo;
 import com.example.javaalkalmazasokeloadas.model.forex.HistoricalPriceResponse;
 import com.example.javaalkalmazasokeloadas.model.forex.Instrument.InstrumentRequest;
 import com.example.javaalkalmazasokeloadas.model.forex.Instrument.InstrumentResponse;
+import com.example.javaalkalmazasokeloadas.model.forex.Position.OpenPositionRequest;
+import com.example.javaalkalmazasokeloadas.model.forex.Position.OpenPositionResponse;
 import com.example.javaalkalmazasokeloadas.service.ApiKeysService;
 import com.oanda.ExecuteException;
 import com.oanda.RequestException;
 import com.oanda.account.AccountInstrumentsRequest;
-import com.oanda.instrument.CandlestickGranularity;
 import com.oanda.instrument.InstrumentCandlesRequest;
+import com.oanda.order.MarketOrderRequest;
+import com.oanda.order.OrderCreateRequest;
 import com.oanda.pricing.PricingGetRequest;
 import com.oanda.primitives.InstrumentName;
 import org.springframework.stereotype.Controller;
@@ -20,7 +23,6 @@ import com.oanda.Context;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/forex")
@@ -70,7 +72,10 @@ public class forexController {
                 "W",
                 "M"
         ));
+        //Sima ár és hozzá a hisztorikus árak lekérdezéséhez:
         model.addAttribute("chosenInstrument", new InstrumentRequest());
+        //Nyitáshoz:
+        model.addAttribute("chosenInstrumentForOpen", new OpenPositionRequest());
         return "forex/instruments";
     }
 
@@ -122,5 +127,26 @@ public class forexController {
             ).toList()
         );
         return "forex/histprice";
+    }
+
+    @PostMapping("/openpos")
+    public String openPosition(
+            @ModelAttribute OpenPositionRequest openPositionRequest,
+            Model model
+    ) throws ExecuteException, RequestException {
+        var request = new OrderCreateRequest(apiKeysService.getAccountId());
+        var marketOrderRequest = new MarketOrderRequest();
+
+        marketOrderRequest.setInstrument(new InstrumentName(openPositionRequest.getName()));
+        marketOrderRequest.setUnits(openPositionRequest.getUnit());
+        request.setOrder(marketOrderRequest);
+
+        var resp = context.order.create(request);
+        model.addAttribute("position", new OpenPositionResponse(
+           resp.getLastTransactionID(),
+           openPositionRequest.getName(),
+           openPositionRequest.getUnit()
+        ));
+        return "forex/openpos";
     }
 }
