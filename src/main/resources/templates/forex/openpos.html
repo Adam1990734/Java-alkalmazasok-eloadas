@@ -13,5 +13,13 @@
         <div>
             <span>Opened with <b th:text="${position.unit}"></b> of units</span>
         </div>
+        <div>
+            <span>Positive: </span>
+            <span th:text="${position.unit.longValue()}"></span>
+        </div>
+        <div>
+            <span>Negative: </span>
+            <span th:text="${position.unit.shortValue()()}"></span>
+        </div>
     </div>
 </main></html>
