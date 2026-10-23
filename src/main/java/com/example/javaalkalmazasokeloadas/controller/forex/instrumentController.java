@@ -33,7 +33,7 @@ public class instrumentController {
                     "M"
             ));
             model.addAttribute("chosenInstrument", new InstrumentRequest());
-            return "forex/instruments";
+            return "forex/instrument/index";
         } else return "redirect:/forex/";
     }
 
@@ -45,7 +45,7 @@ public class instrumentController {
         var instrument = instrumentService.getCurrentPrice(instrumentRequest);
         if(instrument.isPresent()) {
             model.addAttribute("price", instrument.get());
-            return "forex/actprice";
+            return "forex/instrument/actprice";
         } else return "redirect:/forex/instruments";
     }
 
@@ -57,7 +57,7 @@ public class instrumentController {
         var instruments = instrumentService.getHistoricals(instrumentRequest, 10L);
         if(instruments.isPresent()) {
             model.addAttribute("prices", instruments.get());
-            return "forex/histprice";
+            return "forex/instrument/histprice";
         } else return "redirect:/forex/instruments";
     }
 }

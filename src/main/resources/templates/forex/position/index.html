@@ -1,0 +1,27 @@
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{shared/layout}"
+        lang="en"
+><main layout:fragment="content">
+    <form method="post" th:action="@{/forex/positions/openpos}" th:object="${chosenInstrumentToOpen}">
+        <div>
+            <label>Choose an instrument:</label> <br>
+            <select th:field="*{name}">
+                <option th:each="inst : ${availableInstruments}" th:value="${inst}" th:text="${inst}"></option>
+            </select>
+        </div>
+        <div>
+            <label>Units :</label> <br>
+            <input type="number" step="0.1" th:field="*{unit}">
+        </div>
+        <button type="submit">Open</button>
+    </form>
+    <form method="post" th:action="@{/forex/positions/closepos}" th:object="${chosenTradeIdToClose}">
+        <div>
+            <label>Trade id: </label> <br>
+            <input type="number" th:field="*{id}">
+        </div>
+        <button type="submit">Close</button>
+    </form>
+</main></html>

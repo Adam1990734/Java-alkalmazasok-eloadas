@@ -1,0 +1,24 @@
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{shared/layout}"
+        lang="en"
+><main layout:fragment="content">
+    <h2>Look after the actual price:</h2>
+    <form id="instrumentPickerFormForSearch" method="post" th:object="${chosenInstrument}">
+        <div>
+            <label>Choose an instrument:</label> <br>
+            <select th:field="*{name}">
+                <option th:each="inst : ${availableInstruments}" th:value="${inst}" th:text="${inst}"></option>
+            </select>
+        </div>
+        <div>
+            <label>Choose granularity (if relevant):</label> <br>
+            <select th:field="*{granularity}">
+                <option th:each="gran : ${availableGranularities}" th:value="${gran}" th:text="${gran}"></option>
+            </select>
+        </div>
+    </form>
+    <button type="submit" form="instrumentPickerFormForSearch" th:formaction="@{/forex/instruments/actprice}">ActualPrice</button>
+    <button type="submit" form="instrumentPickerFormForSearch" th:formaction="@{/forex/instruments/histprice}">HistoricalPrice</button>
+</main></html>
