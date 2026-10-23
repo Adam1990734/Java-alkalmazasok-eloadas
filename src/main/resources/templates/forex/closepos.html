@@ -1,0 +1,14 @@
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{shared/layout}"
+        lang="en"
+><main layout:fragment="content">
+    <h2>Position is closed</h2>
+    <div>
+        <span>You successfully closed the <b th:text="${position.id}"></b> trade!</span>
+    </div>
+    <div>
+        <span>Close another <a th:href="@{/}">here</a></span>
+    </div>
+</main></html>

@@ -23,7 +23,7 @@
     <button type="submit" form="instrumentPickerFormForSearch" th:formaction="@{/forex/actprice}">ActualPrice</button>
     <button type="submit" form="instrumentPickerFormForSearch" th:formaction="@{/forex/histprice}">HistoricalPrice</button>
     <!-- Instrumentum műveletek: -->
-    <form id="instrumentPickerFormForOp" method="post" th:object="${chosenInstrumentForOpen}">
+    <form method="post" th:action="@{/forex/openpos}" th:object="${chosenInstrumentToOpen}">
         <div>
             <label>Choose an instrument:</label> <br>
             <select th:field="*{name}">
@@ -34,6 +34,13 @@
             <label>Units :</label> <br>
             <input type="number" step="0.1" th:field="*{unit}">
         </div>
+        <button type="submit">Open</button>
     </form>
-    <button type="submit" form="instrumentPickerFormForOp" th:formaction="@{/forex/openpos}">HistoricalPrice</button>
+    <form method="post" th:action="@{/forex/closepos}" th:object="${chosenTradeIdToClose}">
+        <div>
+            <label>Trade id: </label> <br>
+            <input type="number" th:field="*{id}">
+        </div>
+        <button type="submit">Close</button>
+    </form>
 </main></html>

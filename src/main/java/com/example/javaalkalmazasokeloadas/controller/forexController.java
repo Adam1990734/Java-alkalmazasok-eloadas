@@ -4,9 +4,7 @@ import com.example.javaalkalmazasokeloadas.model.forex.AccountInfo;
 import com.example.javaalkalmazasokeloadas.model.forex.HistoricalPriceResponse;
 import com.example.javaalkalmazasokeloadas.model.forex.Instrument.InstrumentRequest;
 import com.example.javaalkalmazasokeloadas.model.forex.Instrument.InstrumentResponse;
-import com.example.javaalkalmazasokeloadas.model.forex.Position.OpenPositionRequest;
-import com.example.javaalkalmazasokeloadas.model.forex.Position.OpenPositionResponse;
-import com.example.javaalkalmazasokeloadas.model.forex.Position.OpenedPositionResponse;
+import com.example.javaalkalmazasokeloadas.model.forex.Position.*;
 import com.example.javaalkalmazasokeloadas.service.ApiKeysService;
 import com.oanda.ExecuteException;
 import com.oanda.RequestException;
@@ -16,6 +14,8 @@ import com.oanda.order.MarketOrderRequest;
 import com.oanda.order.OrderCreateRequest;
 import com.oanda.pricing.PricingGetRequest;
 import com.oanda.primitives.InstrumentName;
+import com.oanda.trade.TradeCloseRequest;
+import com.oanda.trade.TradeSpecifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -76,7 +76,9 @@ public class forexController {
         //Sima ár és hozzá a hisztorikus árak lekérdezéséhez:
         model.addAttribute("chosenInstrument", new InstrumentRequest());
         //Nyitáshoz:
-        model.addAttribute("chosenInstrumentForOpen", new OpenPositionRequest());
+        model.addAttribute("chosenInstrumentToOpen", new OpenPositionRequest());
+        //Zárás:
+        model.addAttribute("chosenTradeIdToClose", new ClosePositionRequest());
         return "forex/instruments";
     }
 
@@ -149,6 +151,22 @@ public class forexController {
            openPositionRequest.getUnit()
         ));
         return "forex/openpos";
+    }
+
+    @PostMapping("/closepos")
+    public String closePosition(
+            @ModelAttribute ClosePositionRequest closePositionRequest,
+            Model model
+    ) throws ExecuteException, RequestException {
+        var request = new TradeCloseRequest(
+                apiKeysService.getAccountId(),
+                new TradeSpecifier(closePositionRequest.getId())
+        );
+        context.trade.close(request);
+        model.addAttribute("position", new ClosePositionResponse(
+                closePositionRequest.getId()
+        ));
+        return "forex/closepos";
     }
 
     @GetMapping("/openedpos")
