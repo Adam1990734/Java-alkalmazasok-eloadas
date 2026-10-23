@@ -8,6 +8,7 @@
     <table th:if="${positions.size() > 0}">
         <thead>
             <tr>
+                <th>Id</th>
                 <th>Instrument</th>
                 <th>Opened At</th>
                 <th>Initial unit</th>
@@ -18,6 +19,7 @@
         </thead>
         <tbody>
             <tr th:each="position : ${positions}">
+                <td th:text="${position.id}"></td>
                 <td th:text="${position.name}"></td>
                 <td th:text="${position.openedAt}"></td>
                 <td th:text="${position.initUnit}"></td>
