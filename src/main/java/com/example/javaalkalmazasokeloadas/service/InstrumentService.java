@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Service
 public interface InstrumentService {
-    Optional<List<String>> getInstrumentsName(Long count);
-    Optional<List<InstrumentResponse>> getInstrumentPrices(InstrumentRequest instrumentRequest);
+    Optional<List<String>> getNames(Long count);
+    Optional<InstrumentResponse> getCurrentPrice(InstrumentRequest instrumentRequest);
     Optional<List<HistoricalPriceResponse>> getHistoricals(InstrumentRequest instrumentRequest, Long count);
 }

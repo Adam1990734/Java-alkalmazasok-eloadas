@@ -11,6 +11,7 @@ import com.oanda.RequestException;
 import com.oanda.account.AccountInstrumentsRequest;
 import com.oanda.instrument.InstrumentCandlesRequest;
 import com.oanda.pricing.PricingGetRequest;
+import com.oanda.primitives.Instrument;
 import com.oanda.primitives.InstrumentName;
 import org.springframework.stereotype.Service;
 
@@ -29,24 +30,22 @@ public class InstrumentServiceImp implements InstrumentService {
     }
 
     @Override
-    public Optional<List<String>> getInstrumentsName(Long count) {
+    public Optional<List<String>> getNames(Long count) {
         try {
             var request = new AccountInstrumentsRequest(apiKeysService.getAccountId());
             var resp = context.account.instruments(request);
-            var instruments = new ArrayList<String>();
-            for (var instrument : resp.getInstruments()) {
-                instruments.add(instrument.getDisplayName());
-                if (instruments.size() == count)
-                    break;
-            }
-            return Optional.of(instruments);
+            return Optional.of(
+                    resp.getInstruments().stream().map(Instrument::getDisplayName)
+                            .limit(count)
+                            .toList()
+            );
         } catch (Exception e) {
             return Optional.empty();
         }
     }
 
     @Override
-    public Optional<List<InstrumentResponse>> getInstrumentPrices(InstrumentRequest instrumentRequest) {
+    public Optional<InstrumentResponse> getCurrentPrice(InstrumentRequest instrumentRequest) {
         try {
             var request = new PricingGetRequest(
                     apiKeysService.getAccountId(),
@@ -70,7 +69,7 @@ public class InstrumentServiceImp implements InstrumentService {
                                         .getPrice()
                                         .doubleValue()
                         )
-                ).toList()
+                ).toList().getFirst()
             );
         } catch (Exception e) {
             return Optional.empty();
@@ -82,7 +81,7 @@ public class InstrumentServiceImp implements InstrumentService {
         try {
             var request = new InstrumentCandlesRequest(new InstrumentName(instrumentRequest.getName()));
             request.setGranularity(instrumentRequest.getGranularity());
-            request.setCount(10L);
+            request.setCount(count);
 
             var resp = context.instrument.candles(request);
             return Optional.of(
