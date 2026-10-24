@@ -6,6 +6,7 @@ import com.example.javaalkalmazasokeloadas.service.InventorService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.example.javaalkalmazasokeloadas.model.crud.PagnetInfo;
 
 import java.util.List;
 
@@ -17,12 +18,20 @@ public class InventorRestController {
         this.inventorService = inventorService;
     }
     @GetMapping
-    public ResponseEntity<List<InventorResponseDto>> findAll() {
-        List<InventorResponseDto> inventors = inventorService.findAll();
-        return ResponseEntity.ok(inventors);
+    public ResponseEntity<PagnetInfo<List<InventorResponseDto>>> findAll(
+            @RequestParam(name = "len", defaultValue = "25") Integer len,
+            @RequestParam(name = "page", defaultValue = "0") Integer page
+    ) {
+        List<InventorResponseDto> inventors = inventorService.findAll(page, len);
+        return ResponseEntity.ok(new PagnetInfo<List<InventorResponseDto>>(
+                page,
+                len,
+                (int)(inventorService.countAll() / len),
+                inventors
+        ));
     }
     @GetMapping("/{id}")
-    public ResponseEntity<InventorResponseDto> findById(@PathVariable Long id) {
+    public ResponseEntity<InventorResponseDto> details(@PathVariable Long id) {
         InventorResponseDto inventor = inventorService.findById(id);
         return ResponseEntity.ok(inventor);
     }

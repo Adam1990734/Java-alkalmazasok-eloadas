@@ -1,5 +1,6 @@
 package com.example.javaalkalmazasokeloadas.controller.crud;
 
+import com.example.javaalkalmazasokeloadas.model.crud.PagnetInfo;
 import com.example.javaalkalmazasokeloadas.model.crud.invention.InventionRequestDto;
 import com.example.javaalkalmazasokeloadas.model.crud.invention.InventionResponseDto;
 import com.example.javaalkalmazasokeloadas.service.InventionService;
@@ -17,12 +18,20 @@ public class InventionRestController {
         this.inventionService = inventionService;
     }
     @GetMapping
-    public ResponseEntity<List<InventionResponseDto>> findAll() {
-        List<InventionResponseDto> inventions = inventionService.findAll();
-        return ResponseEntity.ok(inventions);
+    public ResponseEntity<PagnetInfo<List<InventionResponseDto>>> findAll(
+            @RequestParam(name = "len", defaultValue = "25") Integer len,
+            @RequestParam(name = "page", defaultValue = "0") Integer page
+    ) {
+        List<InventionResponseDto> inventions = inventionService.findAll(page, len);
+        return ResponseEntity.ok(new PagnetInfo<List<InventionResponseDto>>(
+                page,
+                len,
+                (int)(inventionService.countAll() / len),
+                inventions
+        ));
     }
     @GetMapping("/{id}")
-    public ResponseEntity<InventionResponseDto> findById(@PathVariable Long id) {
+    public ResponseEntity<InventionResponseDto> details(@PathVariable Long id) {
         InventionResponseDto invention = inventionService.findById(id);
         return ResponseEntity.ok(invention);
     }
