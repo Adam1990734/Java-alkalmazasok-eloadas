@@ -1,5 +1,6 @@
 package com.example.javaalkalmazasokeloadas.service.imp;
 
+import com.example.javaalkalmazasokeloadas.model.crud.PagnetInfo;
 import com.example.javaalkalmazasokeloadas.model.crud.invention.InventionShortDto;
 import com.example.javaalkalmazasokeloadas.model.crud.inventor.*;
 import com.example.javaalkalmazasokeloadas.repository.InventionRepository;
@@ -72,8 +73,8 @@ public class InventorServiceImp implements InventorService {
     }
 
     @Override
-    public List<InventorResponseDto> findAll(int page, int size) {
-        return repository.findAll(
+    public PagnetInfo<List<InventorResponseDto>> findAll(int page, int size) {
+        var data = repository.findAll(
                         PageRequest.of(
                                 page,
                                 size
@@ -82,6 +83,12 @@ public class InventorServiceImp implements InventorService {
                 .stream()
                 .map(this::toDto)
                 .toList();
+        return new PagnetInfo<List<InventorResponseDto>>(
+                page,
+                size,
+                (int)(countAll() / size),
+                data
+        );
     }
     @Override
     public List<InventorShortDto> findAllGetAsMinimal() {

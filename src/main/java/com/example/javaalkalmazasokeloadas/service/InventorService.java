@@ -1,5 +1,6 @@
 package com.example.javaalkalmazasokeloadas.service;
 
+import com.example.javaalkalmazasokeloadas.model.crud.PagnetInfo;
 import com.example.javaalkalmazasokeloadas.model.crud.inventor.*;
 import org.springframework.stereotype.Service;
 
@@ -8,7 +9,7 @@ import java.util.List;
 @Service
 public interface InventorService {
     List<InventorResponseDto> findAll();
-    List<InventorResponseDto> findAll(int page, int size);
+    PagnetInfo<List<InventorResponseDto>> findAll(int page, int size);
     List<InventorShortDto> findAllGetAsMinimal();
     List<InventorShortDto> findAllGetAsMinimal(int page, int size);
     InventorResponseDto findById(Long id);

@@ -22,13 +22,8 @@ public class InventorRestController {
             @RequestParam(name = "len", defaultValue = "25") Integer len,
             @RequestParam(name = "page", defaultValue = "0") Integer page
     ) {
-        List<InventorResponseDto> inventors = inventorService.findAll(page, len);
-        return ResponseEntity.ok(new PagnetInfo<List<InventorResponseDto>>(
-                page,
-                len,
-                (int)(inventorService.countAll() / len),
-                inventors
-        ));
+        var inventors = inventorService.findAll(page, len);
+        return ResponseEntity.ok(inventors);
     }
     @GetMapping("/{id}")
     public ResponseEntity<InventorResponseDto> details(@PathVariable Long id) {
