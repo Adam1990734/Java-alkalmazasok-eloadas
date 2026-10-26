@@ -17,7 +17,7 @@ export default function InventorCreateView() {
         new: null,
     });
     const onSubmit = async () => {
-        const resp = await axios.post<InventorResponse>('/api/inventors/create', {
+        const resp = await axios.post<InventorResponse>('http://localhost:8080/api/inventors/create', {
             ...inventorRef.current,
         });
         setResult({
@@ -48,11 +48,6 @@ export default function InventorCreateView() {
                 />
                 <button type={'submit'}>Add</button>
             </form>
-            {result.status !== 201 && result.new && (
-                <>
-                    <a href={`/crud/inventors/${result.new.id}`}>Click here to watch it!</a>
-                </>
-            )}
         </>
     );
 }

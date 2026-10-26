@@ -1,4 +1,5 @@
 import type { Inventor } from '../../types/types';
+import { useNavigate } from 'react-router-dom';
 
 type Props = {
     inventor: Inventor;
@@ -7,6 +8,8 @@ type Props = {
 };
 
 export default function InventorRow({ inventor, isComplex, hasOperations = false }: Props) {
+    const navigate = useNavigate();
+
     return (
         <>
             {isComplex ? (
@@ -23,9 +26,9 @@ export default function InventorRow({ inventor, isComplex, hasOperations = false
                     </td>
                     {hasOperations && (
                         <td>
-                            <a href={`/crud/inventors/${inventor.id}`}>Details</a>
-                            <a href={`/crud/inventors/update/${inventor.id}`}>Update</a>
-                            <a href={`/crud/inventors/delete/${inventor.id}`}>Delete</a>
+                            <button onClick={() => navigate(`/inventors/${inventor.id}`)}>Details</button>
+                            <button onClick={() => navigate(`/inventors/update/${inventor.id}`)}>Update</button>
+                            <button onClick={() => navigate(`/inventors/delete/${inventor.id}`)}>Delete</button>
                         </td>
                     )}
                 </tr>
@@ -36,9 +39,9 @@ export default function InventorRow({ inventor, isComplex, hasOperations = false
                     <td>{inventor.diedat ? inventor.diedat : '-'}</td>
                     { hasOperations &&
                         <td>
-                            <a href={`/crud/inventors/${inventor.id}`}>Details</a>
-                            <a href={`/crud/inventors/update/${inventor.id}`}>Update</a>
-                            <a href={`/crud/inventors/delete/${inventor.id}`}>Delete</a>
+                            <button onClick={() => navigate(`/inventors/${inventor.id}`)}>Details</button>
+                            <button onClick={() => navigate(`/inventors/update/${inventor.id}`)}>Update</button>
+                            <button onClick={() => navigate(`/inventors/delete/${inventor.id}`)}>Delete</button>
                         </td>
                     }
                 </tr>

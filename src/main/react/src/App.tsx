@@ -1,11 +1,13 @@
 import './App.css'
+import {useParams} from "react-router-dom";
 
 function App() {
-  return (
-    <>
-      <h1>Hello World!</h1>
-    </>
-  )
+    const { id } = useParams();
+    return (
+        <>
+            <span>{id}</span>
+        </>
+    )
 }
 
 export default App

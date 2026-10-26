@@ -1,15 +1,13 @@
 import { useEffect, useState } from 'react';
 import type { InventorResponse } from '../../types/types';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
-type Props = {
-    id: number
-}
-
-export default function InventorDeleteView({ id }: Props) {
+export default function InventorDeleteView() {
+    const { id } = useParams();
     const [inventor, setInventor] = useState<InventorResponse | null>(null);
     useEffect(() => {
-        axios.get<InventorResponse>(`/api/inventors/${id}`).then((resp) => {
+        axios.get<InventorResponse>(`http://localhost:8080/api/inventors/${id}`).then((resp) => {
             setInventor({
                 ...resp.data,
             });
@@ -18,7 +16,7 @@ export default function InventorDeleteView({ id }: Props) {
 
     const [result, setResult] = useState<number>(0);
     const onSubmit = async () => {
-        const resp = await axios.delete(`/api/inventors/delete/${id}`);
+        const resp = await axios.delete(`http://localhost:8080/inventors/delete/${id}`);
         setResult(resp.status);
     };
 

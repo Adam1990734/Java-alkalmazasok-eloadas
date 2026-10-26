@@ -1,13 +1,10 @@
-import { Invention } from '@/types';
-import { Inventor } from '@/types';
-import { Message } from '@/types';
-import InventionRow from '@/components/invention/invention-row';
-import InventorRow from '@/components/inventor/inventor-row';
-import MessageRow from '@/components/message/message-row';
+import type { Inventor, Invention } from '../../types/types';
+import InventorRow from "../inventor/inventor-row.tsx";
+import InventionRow from "../invention/invention-row.tsx";
 
 type Props = {
     headerLabels: string[];
-    objectToMap: Inventor[] | Invention[] | Message[];
+    objectToMap: Inventor[] | Invention[];
     hasOperations?: boolean;
 };
 
@@ -30,7 +27,7 @@ function Header({ headerLabels, hasOperations: hasOperations = false }: HeaderPr
 }
 
 type BodyProps = {
-    elements: Inventor[] | Invention[] | Message[];
+    elements: Inventor[] | Invention[];
     hasOperations?: boolean;
 };
 
@@ -43,8 +40,6 @@ function Body({ elements, hasOperations = false } : BodyProps) {
                         return <InventionRow key={id} invention={obj} isComplex={false} hasOperations={hasOperations}/>;
                     case 'Inventor':
                         return <InventorRow key={id} inventor={obj} isComplex={false} hasOperations={hasOperations}/>;
-                    case 'Message':
-                        return <MessageRow key={id} message={obj}/>;
                 }
             })
         }

@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/inventors")
+@CrossOrigin("*")
 public class InventorRestController {
     private final InventorService inventorService;
     public InventorRestController(InventorService inventorService) {

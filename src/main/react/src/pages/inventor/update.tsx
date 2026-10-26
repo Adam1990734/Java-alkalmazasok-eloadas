@@ -1,12 +1,10 @@
 import type { InventorResponse, InventorRequest, InventionMinimal } from '../../types/types';
 import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
+import {useParams} from "react-router-dom";
 
-type Props = {
-    id: number;
-};
-
-export default function InventorUpdateView({ id }: Props) {
+export default function InventorUpdateView() {
+    const { id } = useParams();
     const inventorRef = useRef<InventorRequest>({
         name: '',
         bornat: 0,
@@ -15,7 +13,7 @@ export default function InventorUpdateView({ id }: Props) {
     });
     const [inventor, setInventor] = useState<InventorResponse | null>(null);
     useEffect(() => {
-        axios.get<InventorResponse>(`/api/inventors/${id}`).then((resp) => {
+        axios.get<InventorResponse>(`http://localhost:8080/api/inventors/${id}`).then((resp) => {
             const { inventions, ...other } = resp.data;
             inventorRef.current = {
                 ...other,
@@ -30,7 +28,7 @@ export default function InventorUpdateView({ id }: Props) {
     const [result, setResult] = useState<number>(0);
     const onSubmit = async () => {
         console.log(inventorRef.current);
-        const resp = await axios.put<InventorResponse>(`/api/inventors/update/${id}`, {
+        const resp = await axios.put<InventorResponse>(`http://localhost:8080/api/inventors/update/${id}`, {
             ...inventorRef.current
         });
         setResult(resp.status);

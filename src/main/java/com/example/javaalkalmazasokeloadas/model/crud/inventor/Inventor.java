@@ -54,9 +54,7 @@ public class Inventor {
         return diedat;
     }
 
-    public void setDiedat(int diedat) {
-        this.diedat = diedat;
-    }
+    public void setDiedat(int diedat) { this.diedat = diedat; }
 
     public Set<Invention> getInventions() {
         return inventions;

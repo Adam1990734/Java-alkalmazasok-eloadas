@@ -13,10 +13,10 @@ export default function InventorIndexView({ hasOperations = true} : Props) {
     const [page, setPage] = useState<number>(1);
     const lastPage = useRef<number>(0);
     useEffect(() => {
-        axios.get(`/api/inventors?page=${page}`)
+        axios.get(`http://localhost:8080/api/inventors?page=${page}`)
             .then((data) => data.data)
             .then((data) => {
-                lastPage.current = data.last_page;
+                lastPage.current = data.pageMaxCount;
                 setInventors(
                     data.data.map(
                         (obj: Inventor): Inventor => ({

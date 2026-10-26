@@ -2,12 +2,12 @@ package com.example.javaalkalmazasokeloadas.model.crud.invention;
 
 public class InventionShortDto {
     private Long id;
-    private String Name;
+    private String name;
 
     public InventionShortDto() {}
     public InventionShortDto(Long id, String name) {
         this.id = id;
-        Name = name;
+        this.name = name;
     }
 
     public Long getId() {
@@ -19,10 +19,10 @@ public class InventionShortDto {
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 }

@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/inventions")
+@CrossOrigin("*")
 public class InventionRestController {
     private final InventionService inventionService;
     public InventionRestController(InventionService inventionService) {
