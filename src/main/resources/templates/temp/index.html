@@ -1,0 +1,23 @@
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{shared/layout}"
+        lang="en"
+><main layout:fragment="content">
+    <form th:action="@{/temp}" th:object="${temp}" method="post">
+        <div>
+            <label>From</label> <br>
+            <input type="number" step="0.1" th:field="*{temp1Value}" required>
+            <select th:field="*{temp1Name}" required>
+                <option th:each="type : ${availableTempTypes}" th:value="${type}" th:text="${type}"></option>
+            </select>
+        </div>
+        <div>
+            <label>To</label> <br>
+            <select th:field="*{temp2Name}" required>
+                <option th:each="type : ${availableTempTypes}" th:value="${type}" th:text="${type}"></option>
+            </select>
+        </div>
+        <button type="submit">Convert</button>
+    </form>
+</main></html>

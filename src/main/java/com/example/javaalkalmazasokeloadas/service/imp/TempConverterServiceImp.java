@@ -6,7 +6,7 @@ import com.example.javaalkalmazasokeloadas.model.temp.TempResponseDto;
 import com.example.javaalkalmazasokeloadas.service.TempConverterService;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.Objects;
 
 @Service
 public class TempConverterServiceImp implements TempConverterService {
@@ -28,29 +28,25 @@ public class TempConverterServiceImp implements TempConverterService {
 
     @Override
     public TempResponseDto convert(TempRequestDto dto) {
-        switch (dto.getOp()) {
-            case TO_CELSIUS:
-                return new TempResponseDto(
-                        dto.getOp(),
-                        toCelsiusFormat(
-                                fahrenheitToCelsius(dto.getFahrenheit())
-                        ),
-                        toFahrenheitFormat(
-                                dto.getFahrenheit()
-                        )
-                );
-            case TO_FAHRENHEIT:
-                return new TempResponseDto(
-                            dto.getOp(),
-                            toCelsiusFormat(
-                                    dto.getCelsius()
-                            ),
-                            toFahrenheitFormat(
-                                    celsiusToFahrenheit(dto.getCelsius())
-                            )
-                        );
-            default:
-                throw new OperatorNotFoundException("No operator exists in this operation!");
+        String temp1Value = "", temp2Value = "";
+        if(Objects.equals(dto.getTemp1Name(), "Celsius") && Objects.equals(dto.getTemp2Name(), "Fahrenheit")) {
+            temp1Value = toCelsiusFormat(dto.getTemp1Value());
+            temp2Value = toFahrenheitFormat(
+                    celsiusToFahrenheit(dto.getTemp1Value())
+            );
         }
+        else if(Objects.equals(dto.getTemp2Name(), "Celsius") && Objects.equals(dto.getTemp1Name(), "Fahrenheit")) {
+            temp1Value = toFahrenheitFormat(dto.getTemp1Value());
+            temp2Value = toCelsiusFormat(
+                    celsiusToFahrenheit(dto.getTemp1Value())
+            );
+        } else
+            throw new OperatorNotFoundException("No operator exists in this operation!");
+        return new TempResponseDto(
+                dto.getTemp1Name(),
+                temp1Value,
+                dto.getTemp2Name(),
+                temp2Value
+        );
     }
 }

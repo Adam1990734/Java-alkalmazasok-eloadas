@@ -1,0 +1,23 @@
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{shared/layout}"
+        lang="en"
+><main layout:fragment="content">
+    <h2>The results:</h2>
+    <div th:if="${error.isEmpty()}">
+        <div>
+            <span>From:</span> <br>
+            <span><span th:text="${temp.temp1Name}"></span> : </span>
+            <span th:text="${temp.temp1Value}"></span>
+        </div>
+        <div>
+            <span>To:</span> <br>
+            <span><span th:text="${temp.temp2Name}"></span> : </span>
+            <span th:text="${temp.temp2Value}"></span>
+        </div>
+    </div>
+    <div th:if="${error.isEmpty()}">
+        <span th:text="${error}"></span>
+    </div>
+</main></html>
