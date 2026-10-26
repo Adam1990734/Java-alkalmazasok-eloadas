@@ -32,14 +32,22 @@ public class TempConverterServiceImp implements TempConverterService {
             case TO_CELSIUS:
                 return new TempResponseDto(
                         dto.getOp(),
-                        fahrenheitToCelsius(dto.getFahrenheit()),
-                        dto.getFahrenheit()
+                        toCelsiusFormat(
+                                fahrenheitToCelsius(dto.getFahrenheit())
+                        ),
+                        toFahrenheitFormat(
+                                dto.getFahrenheit()
+                        )
                 );
             case TO_FAHRENHEIT:
                 return new TempResponseDto(
                             dto.getOp(),
-                            dto.getCelsius(),
-                            celsiusToFahrenheit(dto.getCelsius())
+                            toCelsiusFormat(
+                                    dto.getCelsius()
+                            ),
+                            toFahrenheitFormat(
+                                    celsiusToFahrenheit(dto.getCelsius())
+                            )
                         );
             default:
                 throw new OperatorNotFoundException("No operator exists in this operation!");

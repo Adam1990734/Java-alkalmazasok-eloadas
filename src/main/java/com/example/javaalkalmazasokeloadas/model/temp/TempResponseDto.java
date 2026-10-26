@@ -1,31 +1,31 @@
 package com.example.javaalkalmazasokeloadas.model.temp;
 
 public class TempResponseDto {
-    private Double celsius;
-    private Double fahrenheit;
+    private String celsius;
+    private String fahrenheit;
     private TempConvertOp op;
 
     public TempResponseDto() {}
 
-    public TempResponseDto(TempConvertOp op, Double celsius, Double fahrenheit) {
+    public TempResponseDto(TempConvertOp op, String celsius, String fahrenheit) {
         this.celsius = celsius;
         this.fahrenheit = fahrenheit;
         this.op = op;
     }
 
-    public Double getCelsius() {
+    public String getCelsius() {
         return celsius;
     }
 
-    public void setCelsius(Double celsius) {
+    public void setCelsius(String celsius) {
         this.celsius = celsius;
     }
 
-    public Double getFahrenheit() {
+    public String getFahrenheit() {
         return fahrenheit;
     }
 
-    public void setFahrenheit(Double fahrenheit) {
+    public void setFahrenheit(String fahrenheit) {
         this.fahrenheit = fahrenheit;
     }
 
