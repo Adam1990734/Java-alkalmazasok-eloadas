@@ -1,6 +1,7 @@
 package com.example.javaalkalmazasokeloadas.service.imp;
 
 import com.example.javaalkalmazasokeloadas.model.temp.OperatorNotFoundException;
+import com.example.javaalkalmazasokeloadas.model.temp.SameTypesGivenException;
 import com.example.javaalkalmazasokeloadas.model.temp.TempRequestDto;
 import com.example.javaalkalmazasokeloadas.model.temp.TempResponseDto;
 import com.example.javaalkalmazasokeloadas.service.TempConverterService;
@@ -28,6 +29,8 @@ public class TempConverterServiceImp implements TempConverterService {
 
     @Override
     public TempResponseDto convert(TempRequestDto dto) {
+        if(Objects.equals(dto.getTemp1Name(), dto.getTemp2Name()))
+            throw new SameTypesGivenException("The given two types are same!");
         String temp1Value = "", temp2Value = "";
         if(Objects.equals(dto.getTemp1Name(), "Celsius") && Objects.equals(dto.getTemp2Name(), "Fahrenheit")) {
             temp1Value = toCelsiusFormat(dto.getTemp1Value());
@@ -37,8 +40,8 @@ public class TempConverterServiceImp implements TempConverterService {
         }
         else if(Objects.equals(dto.getTemp2Name(), "Celsius") && Objects.equals(dto.getTemp1Name(), "Fahrenheit")) {
             temp1Value = toFahrenheitFormat(dto.getTemp1Value());
-            temp2Value = toCelsiusFormat(
-                    celsiusToFahrenheit(dto.getTemp1Value())
+            temp2Value = toFahrenheitFormat(
+                    fahrenheitToCelsius(dto.getTemp1Value())
             );
         } else
             throw new OperatorNotFoundException("No operator exists in this operation!");
