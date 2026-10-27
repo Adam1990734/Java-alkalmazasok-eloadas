@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/inventions")
-@CrossOrigin("*")
+@CrossOrigin(origins = "http://localhost:5173")
 public class InventionRestController {
     private final InventionService inventionService;
     public InventionRestController(InventionService inventionService) {

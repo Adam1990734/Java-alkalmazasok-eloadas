@@ -5,20 +5,34 @@
         lang="en"
 ><main layout:fragment="content">
     <div>
+        <span>
+            <a th:href="@{/forex/instruments}">Instruments</a>
+        </span>
+        <span>
+            <a th:href="@{/forex/positions}">Positions</a>
+        </span>
+    </div>
+    <div>
+        <h2>Account information:</h2>
         <div>
+            <span>Account balance: </span>
             <span th:text="${accountInfo.balance.doubleValue()}"></span>
         </div>
         <div>
+            <span>Account withdraw limit: </span>
             <span th:text="${accountInfo.withdrawLimit.doubleValue()}"></span>
         </div>
         <hr>
         <div>
+            <span>Opened Trades: </span>
             <span th:text="${accountInfo.openTradeCount}"></span>
         </div>
         <div>
+            <span>Opened positions: </span>
             <span th:text="${accountInfo.openPositionCount}"></span>
         </div>
         <div>
+            <span>Pending orders: </span>
             <span th:text="${accountInfo.pendingOrderCount}"></span>
         </div>
     </div>
