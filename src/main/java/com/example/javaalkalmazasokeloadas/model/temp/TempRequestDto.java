@@ -1,10 +1,10 @@
 package com.example.javaalkalmazasokeloadas.model.temp;
 
 public class TempRequestDto {
-    private String temp1Name;
-    private Double temp1Value;
-    private String temp2Name;
-    private Double temp2Value;
+    private String temp1Name = "";
+    private Double temp1Value = 0.0;
+    private String temp2Name = "";
+    private Double temp2Value = 0.0;
 
     public TempRequestDto() {}
 

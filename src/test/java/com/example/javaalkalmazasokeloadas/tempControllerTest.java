@@ -1,15 +1,72 @@
 package com.example.javaalkalmazasokeloadas;
 
+import com.example.javaalkalmazasokeloadas.controller.tempConverterController;
 import com.example.javaalkalmazasokeloadas.service.TempConverterService;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.context.annotation.Import;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import static org.hamcrest.Matchers.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(tempControllerTest.class)
+@WebMvcTest(tempConverterController.class)
 @Import(TempConverterService.class)
 public class tempControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+    @Test
+    @DisplayName("GET - temp, default loading check")
+    void testTempGET() throws Exception {
+        mockMvc.perform(get("/temp"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("temp/index"))
+                .andExpect(model().attributeExists("TempRequestDto"))
+                .andExpect(model().attribute(
+                        "TempRequestDto",
+                        hasProperty("temp1Name", is(""))
+                ))
+                .andExpect(model().attribute(
+                        "TempRequestDto",
+                        hasProperty("temp1Value", is(0))
+                ))
+                .andExpect(model().attribute(
+                        "TempRequestDto",
+                        hasProperty("temp2Name", is(""))
+                ))
+                .andExpect(model().attribute(
+                        "TempRequestDto",
+                        hasProperty("temp2Value", is(0))
+                ));
+    }
+    @Test
+    @DisplayName("POST - temp, default use case result")
+    void testTempPOSTDefaultUseCase() throws Exception {
+        mockMvc.perform(post("/temp")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("temp1Name", "Celsius")
+                .param("temp1Value", "100")
+                .param("temp2Name", "Fahrenheit"))
+                .andExpect(model().attribute(
+                        "TempRequestDto",
+                        hasProperty("temp1Name", is("Celsius"))
+                ))
+                .andExpect(model().attribute(
+                        "TempRequestDto",
+                        hasProperty("temp1Value", is("100,00 °C"))
+                ))
+                .andExpect(model().attribute(
+                        "TempRequestDto",
+                        hasProperty("temp2Name", is("Fahrenheit"))
+                ))
+                .andExpect(model().attribute(
+                        "TempRequestDto",
+                        hasProperty("temp2Value", is("212,00 °C"))
+                ));
+    }
 }
