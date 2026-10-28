@@ -1,23 +1,37 @@
+
 <html
         xmlns:th="http://www.thymeleaf.org"
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         layout:decorate="~{shared/layout}"
-        lang="en"
-><main layout:fragment="content">
-    <h2>The results:</h2>
-    <div th:if="${error.isEmpty()}">
-        <div>
-            <span>From:</span> <br>
-            <span><span th:text="${temp.temp1Name}"></span> : </span>
-            <span th:text="${temp.temp1Value}"></span>
+        lang="hu"
+>
+<main layout:fragment="content">
+    <section class="post featured">
+        <h2>Eredmény:</h2>
+
+        <!-- Ha nincs hiba -->
+        <div th:if="${error == null or error.isEmpty()}" class="box">
+            <div>
+                <strong>Forrás:</strong>
+                <span th:text="${temp.temp1Name}"></span> :
+                <span th:text="${temp.temp1Value}"></span>
+            </div>
+            <div>
+                <strong>Cél:</strong>
+                <span th:text="${temp.temp2Name}"></span> :
+                <span th:text="${temp.temp2Value}"></span>
+            </div>
         </div>
-        <div>
-            <span>To:</span> <br>
-            <span><span th:text="${temp.temp2Name}"></span> : </span>
-            <span th:text="${temp.temp2Value}"></span>
+
+        <!-- Ha van hiba -->
+        <div th:if="${error != null and !error.isEmpty()}" class="box" style="border-color: #ff4d4d; color: #ff4d4d;">
+            <h3>Hiba történt:</h3>
+            <p th:text="${error}"></p>
         </div>
-    </div>
-    <div th:if="${error.isEmpty()}">
-        <span th:text="${error}"></span>
-    </div>
-</main></html>
+
+        <ul class="actions special" style="margin-top: 1.5rem;">
+            <li><a th:href="@{/temp}" class="button">Vissza a konverterhez</a></li>
+        </ul>
+    </section>
+</main>
+</html>
