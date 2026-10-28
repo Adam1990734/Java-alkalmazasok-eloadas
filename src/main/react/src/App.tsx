@@ -1,10 +1,9 @@
 import './App.css'
+import InventorIndexView from "./pages/inventor";
 
 function App() {
     return (
-        <>
-            <h1>Main crud page</h1>
-        </>
+        <InventorIndexView/>
     )
 }
 
