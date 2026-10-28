@@ -92,6 +92,17 @@ public class InventionServiceImp implements InventionService {
     @Override
     public Long countAll() { return repository.count(); }
 
+    @Override
+    public List<InventionShortDto> findSuggestionsByNameAsMinimal(String name, Integer size) {
+        var data = repository.findAllByNameContainingIgnoreCase(
+                name,
+                PageRequest.of(0, size)
+        );
+        return data.stream()
+                .map(this::toShortDto)
+                .toList();
+    }
+
     private InventionResponseDto toDto(Invention invention) {
         InventionResponseDto dto = new InventionResponseDto();
         dto.setId(invention.getId());

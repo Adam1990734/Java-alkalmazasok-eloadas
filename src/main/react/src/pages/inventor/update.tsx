@@ -1,7 +1,8 @@
-import type { InventorResponse, InventorRequest, InventionMinimal } from '../../types/types';
+import type {InventorResponse, InventorRequest, InventionMinimal } from '../../types/types';
 import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import {useParams} from "react-router-dom";
+import InventionSelector from "../../components/invention/invention-selector.tsx";
 
 export default function InventorUpdateView() {
     const { id } = useParams();
@@ -12,6 +13,7 @@ export default function InventorUpdateView() {
         inventions: []
     });
     const [inventor, setInventor] = useState<InventorResponse | null>(null);
+    const [selectedInventions, setSelectedInventions] = useState<InventionMinimal[]>([]);
     useEffect(() => {
         axios.get<InventorResponse>(`http://localhost:8080/api/inventors/${id}`).then((resp) => {
             const { inventions, ...other } = resp.data;
@@ -19,6 +21,7 @@ export default function InventorUpdateView() {
                 ...other,
                 inventions: inventions.map((invention: InventionMinimal) : number => invention.id)
             };
+            setSelectedInventions(inventions);
             setInventor({
                 ...resp.data
             });
@@ -64,6 +67,15 @@ export default function InventorUpdateView() {
                     defaultValue={inventor?.diedat ?? ''}
                     onChange={(e) => (inventorRef.current.diedat = isNaN(e.currentTarget.valueAsNumber) ? null : e.currentTarget.valueAsNumber)}
                     required={false}
+                />
+                <InventionSelector
+                    value={selectedInventions}
+                    onChange={(items) => {
+                        setSelectedInventions(items);
+
+                        inventorRef.current.inventions =
+                            items.map(item => item.id);
+                    }}
                 />
                 <button type={'submit'}>Save</button>
             </form>

@@ -20,4 +20,6 @@ public interface InventionService {
     Long countAll();
 
     InventionRequestDto toSimpDto(InventionResponseDto invention);
+
+    List<InventionShortDto> findSuggestionsByNameAsMinimal(String name, Integer size);
 }

@@ -1,6 +1,7 @@
-import type { InventorRequest, InventorResponse } from '../../types/types';
+import type {InventorRequest, InventorResponse, InventionMinimal} from '../../types/types';
 import { useRef, useState } from 'react';
 import axios from 'axios';
+import InventionSelector from "../../components/invention/invention-selector.tsx";
 
 export default function InventorCreateView() {
     const inventorRef = useRef<InventorRequest>({
@@ -9,6 +10,7 @@ export default function InventorCreateView() {
         diedat: null,
         inventions: [],
     });
+    const [inventions, setInventions] = useState<InventionMinimal[]>([]);
     const [result, setResult] = useState<{
         status: number;
         new: InventorResponse | null;
@@ -19,6 +21,7 @@ export default function InventorCreateView() {
     const onSubmit = async () => {
         const resp = await axios.post<InventorResponse>('http://localhost:8080/api/inventors/create', {
             ...inventorRef.current,
+            inventions: inventions.map(i => i.id)
         });
         setResult({
             status: resp.status,
@@ -45,6 +48,10 @@ export default function InventorCreateView() {
                     type={'number'}
                     onChange={(e) => (inventorRef.current.diedat = isNaN(e.currentTarget.valueAsNumber) ? null : e.currentTarget.valueAsNumber)}
                     required={false}
+                />
+                <InventionSelector
+                    value={inventions}
+                    onChange={setInventions}
                 />
                 <button type={'submit'}>Add</button>
             </form>

@@ -3,6 +3,8 @@ package com.example.javaalkalmazasokeloadas.controller.crud;
 import com.example.javaalkalmazasokeloadas.model.crud.PagnetInfo;
 import com.example.javaalkalmazasokeloadas.model.crud.invention.InventionRequestDto;
 import com.example.javaalkalmazasokeloadas.model.crud.invention.InventionResponseDto;
+import com.example.javaalkalmazasokeloadas.model.crud.invention.InventionShortDto;
+import com.example.javaalkalmazasokeloadas.model.crud.inventor.InventorShortDto;
 import com.example.javaalkalmazasokeloadas.service.InventionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -46,5 +48,16 @@ public class InventionRestController {
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         inventionService.delete(id);
         return ResponseEntity.ok().build();
+    }
+    @GetMapping("/suggest")
+    public ResponseEntity<List<InventionShortDto>> suggestByName(
+            @RequestParam(name = "name", defaultValue = "") String name
+    ) {
+        if(name.isEmpty())
+            return ResponseEntity.ok(
+                    inventionService.findAllGetAsMinimal(0, 10)
+            );
+        var inventors = inventionService.findSuggestionsByNameAsMinimal(name, 10);
+        return ResponseEntity.ok(inventors);
     }
 }
