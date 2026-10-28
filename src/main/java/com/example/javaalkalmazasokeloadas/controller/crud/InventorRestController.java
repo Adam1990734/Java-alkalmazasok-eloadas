@@ -14,7 +14,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/inventors")
-@CrossOrigin(origins = "http://localhost:5173")
 public class InventorRestController {
     private final InventorService inventorService;
     public InventorRestController(InventorService inventorService) {
@@ -42,7 +41,7 @@ public class InventorRestController {
     @PutMapping("/update/{id}")
     public ResponseEntity<InventorResponseDto> update(@PathVariable Long id, @RequestBody InventorRequestDto dto) {
         InventorResponseDto updated = inventorService.update(id, dto);
-        return ResponseEntity.ok(updated);
+        return ResponseEntity.noContent().build();
     }
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {

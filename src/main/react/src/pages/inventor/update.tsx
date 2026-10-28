@@ -34,7 +34,6 @@ export default function InventorUpdateView() {
         const resp = await axios.put<InventorResponse>(`http://localhost:8080/api/inventors/update/${id}`, {
             ...inventorRef.current
         });
-        console.log(resp);
         setResult(resp.status);
     };
 

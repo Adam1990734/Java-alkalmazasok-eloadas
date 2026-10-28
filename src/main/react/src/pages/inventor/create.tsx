@@ -25,7 +25,6 @@ export default function InventorCreateView() {
             ...inventorRef.current,
             inventions: inventions.map(i => i.id)
         });
-        console.log(resp);
         setResult({
             status: resp.status,
             new: { ...resp.data },
@@ -34,7 +33,7 @@ export default function InventorCreateView() {
 
     return (
         <>
-            {result.status !== 201 && result.new && (
+            {result.status === 201 && result.new && (
                 <>
                     <span>The inventor is created!</span>
                 </>
@@ -58,6 +57,11 @@ export default function InventorCreateView() {
                 />
                 <button type={'submit'}>Add</button>
             </form>
+            {result.status === 201 && result.new && (
+                <>
+                    <span>The new inventor is can be found <button onClick={() => navigate(`/crud/inventors/${result.new!.id}`)}>here</button></span>
+                </>
+            )}
             <button onClick={() => navigate(`/crud/inventors`)}>Back</button>
         </>
     );

@@ -14,7 +14,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/inventions")
-@CrossOrigin(origins = "http://localhost:5173")
 public class InventionRestController {
     private final InventionService inventionService;
     public InventionRestController(InventionService inventionService) {
@@ -42,7 +41,7 @@ public class InventionRestController {
     @PutMapping("/update/{id}")
     public ResponseEntity<InventionResponseDto> update(@PathVariable Long id, @RequestBody InventionRequestDto dto) {
         InventionResponseDto updated = inventionService.update(id, dto);
-        return ResponseEntity.ok(updated);
+        return ResponseEntity.noContent().build();
     }
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
