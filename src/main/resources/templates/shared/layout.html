@@ -14,23 +14,12 @@
         <a href="/" class="logo">Java App</a>
     </header>
 
-    <nav id="nav">
-        <ul class="links">
-            <li><a th:href="@{/}">MainMenu</a></li>
-            <li><a th:href="@{/soap}">MNB</a></li>
-            <li><a th:href="@{/forex}">Forex</a></li>
-            <li><a th:href="@{/crud}">CRUD</a></li>
-            <li><a th:href="@{/temp}">TempConverter</a></li>
-        </ul>
-    </nav>
-
-    <div th:replace="~{shared/menu :: menu}" style="display:none;"></div>
+    <nav th:replace="~{shared/menu :: menu}"></nav>
 
     <div id="main">
         <div layout:fragment="content"></div>
     </div>
 
-    &lt;!&ndash; Lábléc &ndash;&gt;
     <footer id="footer">
         <section class="split contact" style="width: 100%; text-align: center;">
             <section>
