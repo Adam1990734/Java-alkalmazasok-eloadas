@@ -1,8 +1,60 @@
-<html
+
+
+<!--<html
         xmlns:th="http://www.thymeleaf.org"
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         layout:decorate="~{shared/layout}"
         lang="en"
 ><main layout:fragment="content">
     <h1>Fooldal</h1>
-</main></html>
+</main></html>-->
+
+
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{shared/layout}"
+        lang="hu"
+>
+<main layout:fragment="content">
+    <section class="post featured">
+        <header class="major">
+            <h2>Üdvözöljük a Spring Boot Alkalmazásban!</h2>
+            <p>Ez a webes felület a Java alkalmazások előadás beadandó feladatához készült.</p>
+        </header>
+
+        <p>Az alkalmazás az alábbi modulokat és funkciókat tartalmazza:</p>
+
+        <div class="row">
+            <div class="col-6 col-12-small" style="margin-bottom: 2rem;">
+                <h3>Magyar Nemzeti Bank (SOAP)</h3>
+                <p>Devizaárfolyamok lekérdezése az MNB webszolgáltatásán keresztül, megadott időszakra és grafikonos ábrázolással.</p>
+                <ul class="actions special">
+                    <li><a th:href="@{/soap}" class="button">Megnyitás (MNB)</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-12-small" style="margin-bottom: 2rem;">
+                <h3>Forex Kliens (OANDA API)</h3>
+                <p>Pénzügyi számlainformációk, aktuális és historikus árfolyamok lekérdezése, valamint pozíciók nyitása és zárása piaci áron.</p>
+                <ul class="actions special">
+                    <li><a th:href="@{/forex}" class="button">Megnyitás (Forex)</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-12-small" style="margin-bottom: 2rem;">
+                <h3>Hőmérséklet Konverter</h3>
+                <p>Celsius, Fahrenheit és Kelvin mértékegységek közötti gyors átváltást biztosító eszköz.</p>
+                <ul class="actions special">
+                    <li><a th:href="@{/temp}" class="button">Megnyitás (Temp)</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-12-small" style="margin-bottom: 2rem;">
+                <h3>Adatbázis Kezelés (CRUD)</h3>
+                <p>Rekordok létrehozása, olvasása, frissítése és törlése H2 adatbázis segítségével.</p>
+                <ul class="actions special">
+                    <li><a th:href="@{/crud}" class="button">Megnyitás (CRUD)</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+</main>
+</html>-->
