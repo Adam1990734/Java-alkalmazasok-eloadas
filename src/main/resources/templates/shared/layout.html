@@ -1,17 +1,3 @@
-<!--
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head>
-    <meta charset="UTF-8">
-    <title>Eloadas Beadando</title>
-</head>
-<body>
-    <div th:replace="~{shared/menu :: menu}"></div>
-    <div layout:fragment="content"></div>
-</body>
-</html>
--->
-
 <!DOCTYPE html>
 <html lang="hu" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
@@ -24,12 +10,10 @@
 <body class="is-preload">
 <div id="wrapper" class="fade-in">
 
-    &lt;!&ndash; Fejléc &ndash;&gt;
     <header id="header">
         <a href="/" class="logo">Java App</a>
     </header>
 
-    &lt;!&ndash; Navigációs menü sáv &ndash;&gt;
     <nav id="nav">
         <ul class="links">
             <li><a th:href="@{/}">MainMenu</a></li>
@@ -40,10 +24,8 @@
         </ul>
     </nav>
 
-    &lt;!&ndash; A meglévő menu.html behívása rejtve/tartaléknak &ndash;&gt;
     <div th:replace="~{shared/menu :: menu}" style="display:none;"></div>
 
-    &lt;!&ndash; Fő tartalom területe &ndash;&gt;
     <div id="main">
         <div layout:fragment="content"></div>
     </div>
@@ -67,7 +49,6 @@
 
 </div>
 
-&lt;!&ndash; Scripts &ndash;&gt;
 <script th:src="@{/assets/js/jquery.min.js}"></script>
 <script th:src="@{/assets/js/jquery.scrollex.min.js}"></script>
 <script th:src="@{/assets/js/jquery.scrolly.min.js}"></script>
