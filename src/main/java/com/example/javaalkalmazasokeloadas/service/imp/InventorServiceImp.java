@@ -9,6 +9,7 @@ import com.example.javaalkalmazasokeloadas.service.InventorService;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.awt.print.Pageable;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -112,6 +113,17 @@ public class InventorServiceImp implements InventorService {
 
     @Override
     public Long countAll() { return repository.count(); }
+
+    @Override
+    public List<InventorShortDto> findSuggestionsByNameAsMinimal(String name, Integer size) {
+        var data = repository.findAllByNameContainingIgnoreCase(
+                name,
+                PageRequest.of(0, size)
+        );
+        return data.stream()
+                .map(this::toShortDto)
+                .toList();
+    }
 
     private InventorResponseDto toDto(Inventor inventor) {
         InventorResponseDto dto = new InventorResponseDto();
