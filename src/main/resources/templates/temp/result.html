@@ -1,3 +1,4 @@
+<!--
 
 <html
         xmlns:th="http://www.thymeleaf.org"
@@ -9,7 +10,7 @@
     <section class="post featured">
         <h2>Eredmény:</h2>
 
-        <!-- Ha nincs hiba -->
+        &lt;!&ndash; Ha nincs hiba &ndash;&gt;
         <div th:if="${error == null or error.isEmpty()}" class="box">
             <div>
                 <strong>Forrás:</strong>
@@ -20,6 +21,47 @@
                 <strong>Cél:</strong>
                 <span th:text="${temp.temp2Name}"></span> :
                 <span th:text="${temp.temp2Value}"></span>
+            </div>
+        </div>
+
+        &lt;!&ndash; Ha van hiba &ndash;&gt;
+        <div th:if="${error != null and !error.isEmpty()}" class="box" style="border-color: #ff4d4d; color: #ff4d4d;">
+            <h3>Hiba történt:</h3>
+            <p th:text="${error}"></p>
+        </div>
+
+        <ul class="actions special" style="margin-top: 1.5rem;">
+            <li><a th:href="@{/temp}" class="button">Vissza a konverterhez</a></li>
+        </ul>
+    </section>
+</main>
+</html>-->
+
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{shared/layout}"
+        lang="hu"
+>
+<main layout:fragment="content">
+    <section class="post featured">
+        <h2>Eredmény:</h2>
+
+        <!-- Akkor jelenik meg, ha a temp vagy TempRequestDto létezik és nincs hiba -->
+        <div th:if="${error == null or error.isEmpty()}" class="box">
+            <div th:with="res=${temp != null ? temp : TempRequestDto}">
+                <div th:if="${res != null}">
+                    <div>
+                        <strong>Forrás:</strong>
+                        <span th:text="${res.temp1Name}"></span> :
+                        <span th:text="${res.temp1Value}"></span>
+                    </div>
+                    <div>
+                        <strong>Cél:</strong>
+                        <span th:text="${res.temp2Name}"></span> :
+                        <span th:text="${res.temp2Value}"></span>
+                    </div>
+                </div>
             </div>
         </div>
 
