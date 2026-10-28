@@ -2,21 +2,13 @@
       xmlns:th="http://www.thymeleaf.org"
 ><body>
     <nav th:fragment="menu">
-        <span>
-            <a th:href="@{/}">MainMenu</a>
-        </span>
-        <span>
-            <a th:href="@{/soap}">MBN</a>
-        </span>
-        <span>
-            <a th:href="@{/forex}">Forex</a>
-        </span>
-        <span>
-            <a th:href="@{/crud}">CRUD</a>
-        </span>
-        <span>
-            <a th:href="@{/temp}">TempConverter</a>
-        </span>
+        <ul class="links">
+            <li><a th:href="@{/}">MainMenu</a></li>
+            <li><a th:href="@{/soap}">MNB</a></li>
+            <li><a th:href="@{/forex}">Forex</a></li>
+            <li><a th:href="@{/crud}">CRUD</a></li>
+            <li><a th:href="@{/temp}">TempConverter</a></li>
+        </ul>
     </nav>
 </body></html>
 

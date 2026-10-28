@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="hu" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
@@ -12,33 +10,16 @@
 <body class="is-preload">
 <div id="wrapper" class="fade-in">
 
-    &lt;!&ndash; Fejléc &ndash;&gt;
     <header id="header">
         <a href="/" class="logo">Java App</a>
     </header>
 
+    <nav th:replace="~{shared/menu :: menu}"></nav>
 
-
-    &lt;!&ndash; Navigációs menü sáv &ndash;&gt;
-    <nav id="nav">
-        <ul class="links">
-            <li><a th:href="@{/}">MainMenu</a></li>
-            <li><a th:href="@{/soap}">MNB</a></li>
-            <li><a th:href="@{/forex}">Forex</a></li>
-            <li><a th:href="@{/crud}">CRUD</a></li>
-            <li><a th:href="@{/temp}">TempConverter</a></li>
-        </ul>
-    </nav>
-
-    &lt;!&ndash; A meglévő menu.html behívása rejtve/tartaléknak &ndash;&gt;
-    <div th:replace="~{shared/menu :: menu}" style="display:none;"></div>
-
-    &lt;!&ndash; Fő tartalom területe &ndash;&gt;
     <div id="main">
         <div layout:fragment="content"></div>
     </div>
 
-    &lt;!&ndash; Lábléc &ndash;&gt;
     <footer id="footer">
         <section class="split contact" style="width: 100%; text-align: center;">
             <section>
@@ -57,7 +38,6 @@
 
 </div>
 
-&lt;!&ndash; Scripts &ndash;&gt;
 <script th:src="@{/assets/js/jquery.min.js}"></script>
 <script th:src="@{/assets/js/jquery.scrollex.min.js}"></script>
 <script th:src="@{/assets/js/jquery.scrolly.min.js}"></script>
@@ -66,4 +46,4 @@
 <script th:src="@{/assets/js/util.js}"></script>
 <script th:src="@{/assets/js/main.js}"></script>
 </body>
-</html>
+</html>-->
