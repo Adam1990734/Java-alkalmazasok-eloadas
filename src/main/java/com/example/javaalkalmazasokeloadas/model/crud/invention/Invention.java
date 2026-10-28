@@ -36,7 +36,5 @@ public class Invention {
         return inventors;
     }
 
-    public void addInventor(Inventor inventor) {
-        this.inventors.add(inventor);
-    }
+    public void setInventors(Set<Inventor> inventors) { this.inventors = inventors; }
 }

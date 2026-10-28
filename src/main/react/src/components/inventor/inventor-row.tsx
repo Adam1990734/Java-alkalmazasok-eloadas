@@ -26,9 +26,9 @@ export default function InventorRow({ inventor, isComplex, hasOperations = false
                     </td>
                     {hasOperations && (
                         <td>
-                            <button onClick={() => navigate(`/inventors/${inventor.id}`)}>Details</button>
-                            <button onClick={() => navigate(`/inventors/update/${inventor.id}`)}>Update</button>
-                            <button onClick={() => navigate(`/inventors/delete/${inventor.id}`)}>Delete</button>
+                            <button onClick={() => navigate(`/crud/inventors/${inventor.id}`)}>Details</button>
+                            <button onClick={() => navigate(`/crud/inventors/update/${inventor.id}`)}>Update</button>
+                            <button onClick={() => navigate(`/crud/inventors/delete/${inventor.id}`)}>Delete</button>
                         </td>
                     )}
                 </tr>
@@ -39,9 +39,9 @@ export default function InventorRow({ inventor, isComplex, hasOperations = false
                     <td>{inventor.diedat ? inventor.diedat : '-'}</td>
                     { hasOperations &&
                         <td>
-                            <button onClick={() => navigate(`/inventors/${inventor.id}`)}>Details</button>
-                            <button onClick={() => navigate(`/inventors/update/${inventor.id}`)}>Update</button>
-                            <button onClick={() => navigate(`/inventors/delete/${inventor.id}`)}>Delete</button>
+                            <button onClick={() => navigate(`/crud/inventors/${inventor.id}`)}>Details</button>
+                            <button onClick={() => navigate(`/crud/inventors/update/${inventor.id}`)}>Update</button>
+                            <button onClick={() => navigate(`/crud/inventors/delete/${inventor.id}`)}>Delete</button>
                         </td>
                     }
                 </tr>

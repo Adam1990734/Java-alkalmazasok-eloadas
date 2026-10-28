@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/crud")
 public class crudController {
-    @GetMapping
+    @RequestMapping({
+            "/",
+            "/**"
+    })
     public String index() {
-        //Ez lesz majd a reactot küldeni
-        return "crud/";
+        return "forward:/react/index.html";
     }
 }

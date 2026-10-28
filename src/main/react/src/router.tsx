@@ -8,27 +8,27 @@ import App from './App.tsx';
 
 export const router = createBrowserRouter([
     {
-        path: '/',
+        path: '/crud',
         element: <App/>
     },
     {
-        path: '/inventors',
+        path: '/crud/inventors',
         element: <InventorIndexView hasOperations={true}/>
     },
     {
-        path: '/inventors/create',
+        path: '/crud/inventors/create',
         element: <InventorCreateView/>
     },
     {
-        path: '/inventors/:id',
+        path: '/crud/inventors/:id',
         element: <InventorDetailsView/>
     },
     {
-        path: '/inventors/update/:id',
+        path: '/crud/inventors/update/:id',
         element: <InventorUpdateView/>
     },
     {
-        path: '/inventors/delete/:id',
+        path: '/crud/inventors/delete/:id',
         element: <InventorDeleteView/>
     }
 ]);

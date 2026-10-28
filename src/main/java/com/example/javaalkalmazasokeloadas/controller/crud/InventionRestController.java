@@ -33,18 +33,18 @@ public class InventionRestController {
         InventionResponseDto invention = inventionService.findById(id);
         return ResponseEntity.ok(invention);
     }
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<InventionResponseDto> create(@RequestBody InventionRequestDto dto) {
         InventionResponseDto created = inventionService.create(dto);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(created);
     }
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<InventionResponseDto> update(@PathVariable Long id, @RequestBody InventionRequestDto dto) {
         InventionResponseDto updated = inventionService.update(id, dto);
         return ResponseEntity.ok(updated);
     }
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         inventionService.delete(id);
         return ResponseEntity.ok().build();

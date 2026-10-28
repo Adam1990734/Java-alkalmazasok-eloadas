@@ -1,11 +1,12 @@
 import type {InventorResponse, InventorRequest, InventionMinimal } from '../../types/types';
 import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import InventionSelector from "../../components/invention/invention-selector.tsx";
 
 export default function InventorUpdateView() {
     const { id } = useParams();
+    const navigate = useNavigate();
     const inventorRef = useRef<InventorRequest>({
         name: '',
         bornat: 0,
@@ -30,10 +31,10 @@ export default function InventorUpdateView() {
 
     const [result, setResult] = useState<number>(0);
     const onSubmit = async () => {
-        console.log(inventorRef.current);
         const resp = await axios.put<InventorResponse>(`http://localhost:8080/api/inventors/update/${id}`, {
             ...inventorRef.current
         });
+        console.log(resp);
         setResult(resp.status);
     };
 
@@ -79,6 +80,7 @@ export default function InventorUpdateView() {
                 />
                 <button type={'submit'}>Save</button>
             </form>
+            <button onClick={() => navigate(`/crud/inventors`)}>Back</button>
         </>
     );
 }

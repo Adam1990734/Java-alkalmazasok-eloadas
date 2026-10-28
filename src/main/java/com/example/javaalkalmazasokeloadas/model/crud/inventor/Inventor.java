@@ -17,10 +17,10 @@ public class Inventor {
     private String name;
 
     @Column(name = "szul", nullable = false)
-    private int bornat;
+    private Integer bornat;
 
     @Column(name = "meghal", nullable = true)
-    private int diedat;
+    private Integer diedat;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
@@ -42,25 +42,23 @@ public class Inventor {
         this.name = name;
     }
 
-    public int getBornat() {
+    public Integer getBornat() {
         return bornat;
     }
 
-    public void setBornat(int bornat) {
+    public void setBornat(Integer bornat) {
         this.bornat = bornat;
     }
 
-    public int getDiedat() {
+    public Integer getDiedat() {
         return diedat;
     }
 
-    public void setDiedat(int diedat) { this.diedat = diedat; }
+    public void setDiedat(Integer diedat) { this.diedat = diedat; }
 
     public Set<Invention> getInventions() {
         return inventions;
     }
 
-    public void addInvention(Invention invention) {
-        this.inventions.add(invention);
-    }
+    public void setInventions(Set<Invention> inventions) { this.inventions = inventions; }
 }

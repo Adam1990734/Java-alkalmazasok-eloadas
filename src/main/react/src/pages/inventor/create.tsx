@@ -2,8 +2,10 @@ import type {InventorRequest, InventorResponse, InventionMinimal} from '../../ty
 import { useRef, useState } from 'react';
 import axios from 'axios';
 import InventionSelector from "../../components/invention/invention-selector.tsx";
+import {useNavigate} from "react-router-dom";
 
 export default function InventorCreateView() {
+    const navigate = useNavigate();
     const inventorRef = useRef<InventorRequest>({
         name: '',
         bornat: 0,
@@ -23,6 +25,7 @@ export default function InventorCreateView() {
             ...inventorRef.current,
             inventions: inventions.map(i => i.id)
         });
+        console.log(resp);
         setResult({
             status: resp.status,
             new: { ...resp.data },
@@ -55,6 +58,7 @@ export default function InventorCreateView() {
                 />
                 <button type={'submit'}>Add</button>
             </form>
+            <button onClick={() => navigate(`/crud/inventors`)}>Back</button>
         </>
     );
 }

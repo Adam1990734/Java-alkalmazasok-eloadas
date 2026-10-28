@@ -61,7 +61,6 @@ export default function InventionSelector({
             <input
                 type="text"
                 maxLength={40}
-                required
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Inventor search..."

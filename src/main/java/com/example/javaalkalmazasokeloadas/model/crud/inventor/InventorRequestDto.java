@@ -1,5 +1,6 @@
 package com.example.javaalkalmazasokeloadas.model.crud.inventor;
 
+import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -15,6 +16,7 @@ public class InventorRequestDto {
     @NotNull
     private Integer bornat;
 
+    @Nullable
     private Integer diedat;
 
     @NotEmpty

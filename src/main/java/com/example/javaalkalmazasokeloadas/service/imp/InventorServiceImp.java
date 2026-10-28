@@ -10,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.awt.print.Pageable;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,11 +44,10 @@ public class InventorServiceImp implements InventorService {
         Inventor inventor = new Inventor();
         inventor.setName(dto.getName());
         inventor.setBornat(dto.getBornat());
-        if (dto.getDiedat() != null) {
-            inventor.setDiedat(dto.getDiedat());
-        }
-        for(var invention : this.inventionRepository.findAllById(dto.getInventions()))
-            inventor.addInvention(invention);
+        inventor.setDiedat(dto.getDiedat());
+        inventor.setInventions(new HashSet<>(
+                this.inventionRepository.findAllById(dto.getInventions())
+        ));
         return toDto(repository.save(inventor));
     }
 
@@ -60,11 +60,10 @@ public class InventorServiceImp implements InventorService {
                         new RuntimeException("Inventor not found"));
         inventor.setName(dto.getName());
         inventor.setBornat(dto.getBornat());
-        if (dto.getDiedat() != null) {
-            inventor.setDiedat(dto.getDiedat());
-        }
-        for(var invention : this.inventionRepository.findAllById(dto.getInventions()))
-            inventor.addInvention(invention);
+        inventor.setDiedat(dto.getDiedat());
+        inventor.setInventions(new HashSet<>(
+                this.inventionRepository.findAllById(dto.getInventions())
+        ));
         return toDto(repository.save(inventor));
     }
 
