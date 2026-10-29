@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import type { InventorResponse } from '../../types/types';
 import axios from 'axios';
 import {useNavigate, useParams} from 'react-router-dom';
+import Layout from "../../layout.tsx";
+import FormLayout from "../../formLayout.tsx";
 
 export default function InventorDeleteView() {
     const { id } = useParams();
@@ -22,24 +24,35 @@ export default function InventorDeleteView() {
     };
 
     return (
-        <>
+        <Layout>
             {result === 204 && (
                 <>
                     <span>Successfully deletion!</span>
                 </>
             )}
-            <form
-                onSubmit={async (e) => {
-                    e.preventDefault();
-                    await onSubmit();
-                }}
-            >
-                <input type={'text'} defaultValue={inventor?.name ?? ''} required={true} disabled={true} />
-                <input type={'number'} defaultValue={inventor?.bornat ?? ''} required={true} disabled={true} />
-                <input type={'number'} defaultValue={inventor?.diedat ?? ''} required={true} disabled={true} />
-                <button type={'submit'}>Delete</button>
-            </form>
-            <button onClick={() => navigate(`/crud/inventors`)}>Back</button>
-        </>
+            <FormLayout name={"Delete"}>
+                <form
+                    onSubmit={async (e) => {
+                        e.preventDefault();
+                        await onSubmit();
+                    }}
+                >
+                    <div className={"mb-3"}>
+                        <label className={"form-label"}>Name: </label> <br/>
+                        <input className={"form-control"} type={'text'} defaultValue={inventor?.name ?? ''} required={true} disabled={true} />
+                    </div>
+                    <div className={"mb-3"}>
+                        <label className={"form-label"}>Born At: </label> <br/>
+                        <input className={"form-control"} type={'number'} defaultValue={inventor?.bornat ?? ''} required={true} disabled={true} />
+                    </div>
+                    <div className={"mb-3"}>
+                        <label className={"form-label"}>Died At: </label> <br/>
+                        <input className={"form-control"} type={'number'} defaultValue={inventor?.diedat ?? ''} required={true} disabled={true} />
+                    </div>
+                    <button className={"btn btn-primary"} type={'submit'}>Delete</button>
+                </form>
+                <button className={"btn btn-secondary"} onClick={() => navigate(`/crud/inventors`)}>Back</button>
+            </FormLayout>
+        </Layout>
     );
 }

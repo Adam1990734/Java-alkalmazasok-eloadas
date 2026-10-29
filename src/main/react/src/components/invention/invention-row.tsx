@@ -23,9 +23,9 @@ export default function InventionRow({ invention, isComplex, hasOperations = fal
                     </td>
                     { hasOperations && (
                         <td>
-                            <button onClick={() => navigate(`/crud/inventions/${invention.id}`)}>Details</button>
-                            <button onClick={() => navigate(`/crud/inventions/update/${invention.id}`)}>Update</button>
-                            <button onClick={() => navigate(`/crud/inventions/delete/${invention.id}`)}>Delete</button>
+                            <button className={"secondary-btn"} onClick={() => navigate(`/crud/inventions/${invention.id}`)}>Details</button>
+                            <button className={"secondary-btn"} onClick={() => navigate(`/crud/inventions/update/${invention.id}`)}>Update</button>
+                            <button className={"secondary-btn"} onClick={() => navigate(`/crud/inventions/delete/${invention.id}`)}>Delete</button>
                         </td>
                     )}
                 </tr>
@@ -34,9 +34,9 @@ export default function InventionRow({ invention, isComplex, hasOperations = fal
                     <td>{invention.name}</td>
                     { hasOperations &&
                         <td>
-                            <button onClick={() => navigate(`/crud/inventions/${invention.id}`)}>Details</button>
-                            <button onClick={() => navigate(`/crud/inventions/update/${invention.id}`)}>Update</button>
-                            <button onClick={() => navigate(`/crud/inventions/delete/${invention.id}`)}>Delete</button>
+                            <button className={"secondary-btn"} onClick={() => navigate(`/crud/inventions/${invention.id}`)}>Details</button>
+                            <button className={"secondary-btn"} onClick={() => navigate(`/crud/inventions/update/${invention.id}`)}>Update</button>
+                            <button className={"secondary-btn"} onClick={() => navigate(`/crud/inventions/delete/${invention.id}`)}>Delete</button>
                         </td>
                     }
                 </tr>

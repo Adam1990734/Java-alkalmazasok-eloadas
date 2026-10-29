@@ -48,7 +48,7 @@ function Body({ elements, hasOperations = false } : BodyProps) {
 
 export default function Table({ objectToMap, headerLabels, hasOperations = false }: Props) {
     return (
-        <table>
+        <table className={"table table-striped table-hover"}>
             <Header headerLabels={headerLabels} hasOperations={hasOperations} />
             <Body elements={objectToMap} hasOperations={hasOperations} />
         </table>
