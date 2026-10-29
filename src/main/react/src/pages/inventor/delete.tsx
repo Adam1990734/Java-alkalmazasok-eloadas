@@ -17,7 +17,7 @@ export default function InventorDeleteView() {
 
     const [result, setResult] = useState<number>(0);
     const onSubmit = async () => {
-        const resp = await axios.delete(`http://localhost:8080/api/inventors/delete/${id}`);
+        const resp = await axios.delete(`http://localhost:8080/api/inventors/${id}`);
         setResult(resp.status);
     };
 

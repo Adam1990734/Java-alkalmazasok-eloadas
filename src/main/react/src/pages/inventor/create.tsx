@@ -21,7 +21,7 @@ export default function InventorCreateView() {
         new: null,
     });
     const onSubmit = async () => {
-        const resp = await axios.post<InventorResponse>('http://localhost:8080/api/inventors/create', {
+        const resp = await axios.post<InventorResponse>('http://localhost:8080/api/inventors', {
             ...inventorRef.current,
             inventions: inventions.map(i => i.id)
         });

@@ -31,7 +31,7 @@ export default function InventorUpdateView() {
 
     const [result, setResult] = useState<number>(0);
     const onSubmit = async () => {
-        const resp = await axios.put<InventorResponse>(`http://localhost:8080/api/inventors/update/${id}`, {
+        const resp = await axios.put<InventorResponse>(`http://localhost:8080/api/inventors/${id}`, {
             ...inventorRef.current
         });
         setResult(resp.status);
