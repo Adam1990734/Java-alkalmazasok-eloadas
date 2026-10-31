@@ -7,39 +7,42 @@
 <main layout:fragment="content">
     <section class="post featured">
         <header class="major">
-            <h2>Üdvözöljük a Spring Boot Alkalmazásban!</h2>
-            <p>Ez a webes felület a Java alkalmazások előadás beadandó feladatához készült.</p>
+            <h2>Welcome to the Spring Boot Application!</h2>
+            <p>This web interface was created for the coursework assignment of the Java Applications course.</p>
         </header>
 
-        <p>Az alkalmazás az alábbi modulokat és funkciókat tartalmazza:</p>
+        <p>The application includes the following modules and features:</p>
 
         <div class="row">
             <div class="col-6 col-12-small" style="margin-bottom: 2rem;">
-                <h3>Magyar Nemzeti Bank (SOAP)</h3>
-                <p>Devizaárfolyamok lekérdezése az MNB webszolgáltatásán keresztül, megadott időszakra és grafikonos ábrázolással.</p>
+                <h3>Hungarian National Bank (SOAP)</h3>
+                <p>Retrieve exchange rates through the MNB web service for a specified period, with graphical visualization.</p>
                 <ul class="actions special">
-                    <li><a th:href="@{/soap}" class="button">Megnyitás (MNB)</a></li>
+                    <li><a th:href="@{/soap}" class="button">Open (MNB)</a></li>
                 </ul>
             </div>
+
             <div class="col-6 col-12-small" style="margin-bottom: 2rem;">
-                <h3>Forex Kliens (OANDA API)</h3>
-                <p>Pénzügyi számlainformációk, aktuális és historikus árfolyamok lekérdezése, valamint pozíciók nyitása és zárása piaci áron.</p>
+                <h3>Forex Client (OANDA API)</h3>
+                <p>Access financial account information, retrieve current and historical exchange rates, and open or close positions at market prices.</p>
                 <ul class="actions special">
-                    <li><a th:href="@{/forex}" class="button">Megnyitás (Forex)</a></li>
+                    <li><a th:href="@{/forex}" class="button">Open (Forex)</a></li>
                 </ul>
             </div>
+
             <div class="col-6 col-12-small" style="margin-bottom: 2rem;">
-                <h3>Hőmérséklet Konverter</h3>
-                <p>Celsius, Fahrenheit és Kelvin mértékegységek közötti gyors átváltást biztosító eszköz.</p>
+                <h3>Temperature Converter</h3>
+                <p>A tool for quick conversion between Celsius, Fahrenheit, and Kelvin temperature units.</p>
                 <ul class="actions special">
-                    <li><a th:href="@{/temp}" class="button">Megnyitás (Temp)</a></li>
+                    <li><a th:href="@{/temp}" class="button">Open (Temp)</a></li>
                 </ul>
             </div>
+
             <div class="col-6 col-12-small" style="margin-bottom: 2rem;">
-                <h3>Adatbázis Kezelés (CRUD)</h3>
-                <p>Rekordok létrehozása, olvasása, frissítése és törlése H2 adatbázis segítségével.</p>
+                <h3>Database Management (CRUD)</h3>
+                <p>Create, read, update, and delete records using an H2 database.</p>
                 <ul class="actions special">
-                    <li><a th:href="@{/crud}" class="button">Megnyitás (CRUD)</a></li>
+                    <li><a th:href="@{/crud}" class="button">Open (CRUD)</a></li>
                 </ul>
             </div>
         </div>

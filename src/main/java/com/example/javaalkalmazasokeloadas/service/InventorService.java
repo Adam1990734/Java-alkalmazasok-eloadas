@@ -21,4 +21,6 @@ public interface InventorService {
     InventorRequestDto toSimpDto(InventorResponseDto inventor);
 
     List<InventorShortDto> findSuggestionsByNameAsMinimal(String name, Integer size);
+
+    boolean Exist(Long id);
 }

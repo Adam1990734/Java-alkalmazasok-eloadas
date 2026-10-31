@@ -103,6 +103,14 @@ public class InventionServiceImp implements InventionService {
                 .toList();
     }
 
+    @Override
+    public boolean Exist(Long id) {
+        var data = repository.findById(id);
+        if(data.isPresent())
+            return true;
+        return false;
+    }
+
     private InventionResponseDto toDto(Invention invention) {
         InventionResponseDto dto = new InventionResponseDto();
         dto.setId(invention.getId());

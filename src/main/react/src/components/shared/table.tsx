@@ -1,6 +1,5 @@
 import type { Inventor, Invention } from '../../types/types';
 import InventorRow from "../inventor/inventor-row.tsx";
-import InventionRow from "../invention/invention-row.tsx";
 
 type Props = {
     headerLabels: string[];
@@ -15,12 +14,26 @@ type HeaderProps = {
 
 function Header({ headerLabels, hasOperations = false }: HeaderProps) {
     return (
-        <thead>
+        <thead className="table-dark">
         <tr>
             {headerLabels.map((label, id) => (
-                <th key={id}>{label}</th>
+                <th
+                    key={id}
+                    scope="col"
+                    className="text-uppercase small fw-semibold"
+                >
+                    {label}
+                </th>
             ))}
-            {hasOperations && <th>Operations</th>}
+
+            {hasOperations && (
+                <th
+                    scope="col"
+                    className="text-uppercase small fw-semibold text-center"
+                >
+                    Operations
+                </th>
+            )}
         </tr>
         </thead>
     );
@@ -33,24 +46,34 @@ type BodyProps = {
 
 function Body({ elements, hasOperations = false } : BodyProps) {
     return (
-        <tbody>
-        {
-            elements.map((obj, id) => {
-                switch (obj.type) {
-                    case 'Invention':
-                        return <InventionRow key={id} invention={obj} isComplex={false} hasOperations={hasOperations}/>;
-                    case 'Inventor':
-                        return <InventorRow key={id} inventor={obj} isComplex={false} hasOperations={hasOperations}/>;
-                }
-            })
-        }
+        <tbody className="table-group-divider">
+        {elements.map((obj, id) => {
+            switch (obj.type) {
+                //Ha kéne:
+                case "Invention":
+                    return (<></>);
+
+                case "Inventor":
+                    return (
+                        <InventorRow
+                            key={id}
+                            inventor={obj}
+                            isComplex={false}
+                            hasOperations={hasOperations}
+                        />
+                    );
+
+                default:
+                    return (<></>);
+            }
+        })}
         </tbody>
     );
 }
 
 export default function Table({ objectToMap, headerLabels, hasOperations = false }: Props) {
     return (
-        <table className="table table-striped table-hover align-middle">
+        <table className="table table-hover align-middle shadow-sm">
             <Header headerLabels={headerLabels} hasOperations={hasOperations} />
             <Body elements={objectToMap} hasOperations={hasOperations} />
         </table>

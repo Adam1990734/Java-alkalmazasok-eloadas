@@ -124,6 +124,14 @@ public class InventorServiceImp implements InventorService {
                 .toList();
     }
 
+    @Override
+    public boolean Exist(Long id) {
+        var data = repository.findById(id);
+        if(data.isPresent())
+            return true;
+        return false;
+    }
+
     private InventorResponseDto toDto(Inventor inventor) {
         InventorResponseDto dto = new InventorResponseDto();
         dto.setId(inventor.getId());

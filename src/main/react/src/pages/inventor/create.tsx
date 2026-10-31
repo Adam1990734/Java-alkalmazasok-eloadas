@@ -3,8 +3,8 @@ import { useRef, useState } from 'react';
 import axios from 'axios';
 import InventionSelector from "../../components/invention/invention-selector.tsx";
 import {useNavigate} from "react-router-dom";
-import Layout from "../../layout.tsx";
-import FormLayout from "../../formLayout.tsx";
+import Layout from "../../layouts/layout.tsx";
+import FormLayout from "../../layouts/formLayout.tsx";
 
 export default function InventorCreateView() {
     const navigate = useNavigate();
@@ -35,48 +35,106 @@ export default function InventorCreateView() {
 
     return (
         <Layout>
-            {result.status === 201 && result.new && (
-                <>
-                    <span>The inventor is created!</span>
-                </>
-            )}
-            <FormLayout name={"Create"}>
+            <FormLayout name="Create Inventor">
+                {result.status === 201 && result.new && (
+                    <div className="alert alert-success d-flex justify-content-between align-items-center">
+                    <span>
+                        The inventor was created successfully.
+                    </span>
+                        <button
+                            type="button"
+                            className="btn btn-success btn-sm"
+                            onClick={() =>
+                                navigate(`/crud/inventors/${result.new!.id}`)
+                            }
+                        >
+                            View Details
+                        </button>
+                    </div>
+                )}
                 <form
                     onSubmit={async (e) => {
                         e.preventDefault();
                         await onSubmit();
                     }}
                 >
-                    <div className={"mb-3"}>
-                        <label className={"form-label"}>Name: </label> <br/>
-                        <input className={"form-control"} type={'text'} onChange={(e) => (inventorRef.current.name = e.currentTarget.value)} required={true} />
-                    </div>
-                    <div className={"mb-3"}>
-                        <label className={"form-label"}>Born At: </label> <br/>
-                        <input className={"form-control"} type={'number'} onChange={(e) => (inventorRef.current.bornat = Number(e.currentTarget.value))} required={true} />
-                    </div>
-                    <div className={"mb-3"}>
-                        <label className={"form-label"}>Died At: </label> <br/>
+                    <div className="mb-3">
+                        <label className="form-label fw-semibold">
+                            Name
+                        </label>
+
                         <input
-                            type={'number'}
-                            className={"form-control"}
-                            onChange={(e) => (inventorRef.current.diedat = isNaN(e.currentTarget.valueAsNumber) ? null : e.currentTarget.valueAsNumber)}
-                            required={false}
+                            className="form-control"
+                            type="text"
+                            required
+                            onChange={(e) =>
+                                (inventorRef.current.name =
+                                    e.currentTarget.value)
+                            }
                         />
                     </div>
-                    <label className={"form-label"}>Inventions: </label> <br/>
-                    <InventionSelector
-                        value={inventions}
-                        onChange={setInventions}
-                    />
-                    <button className={"btn btn-primary"} type={'submit'}>Add</button>
+
+                    <div className="mb-3">
+                        <label className="form-label fw-semibold">
+                            Born At
+                        </label>
+
+                        <input
+                            className="form-control"
+                            type="number"
+                            required
+                            onChange={(e) =>
+                                (inventorRef.current.bornat =
+                                    Number(e.currentTarget.value))
+                            }
+                        />
+                    </div>
+
+                    <div className="mb-3">
+                        <label className="form-label fw-semibold">
+                            Died At
+                        </label>
+
+                        <input
+                            className="form-control"
+                            type="number"
+                            onChange={(e) =>
+                                (inventorRef.current.diedat =
+                                    isNaN(e.currentTarget.valueAsNumber)
+                                        ? null
+                                        : e.currentTarget.valueAsNumber)
+                            }
+                        />
+                    </div>
+
+                    <div className="mb-4">
+                        <label className="form-label fw-semibold">
+                            Inventions
+                        </label>
+
+                        <InventionSelector
+                            value={inventions}
+                            onChange={setInventions}
+                        />
+                    </div>
+
+                    <div className="d-flex justify-content-between">
+                        <button
+                            type="button"
+                            className="btn btn-outline-secondary"
+                            onClick={() => navigate("/crud/inventors")}
+                        >
+                            Back
+                        </button>
+
+                        <button
+                            className="btn btn-primary"
+                            type="submit"
+                        >
+                            Create Inventor
+                        </button>
+                    </div>
                 </form>
-                {result.status === 201 && result.new && (
-                    <>
-                        <span>The new inventor is can be found <button onClick={() => navigate(`/crud/inventors/${result.new!.id}`)}>here</button></span>
-                    </>
-                )}
-                <button className={"btn btn-secondary"} onClick={() => navigate(`/crud/inventors`)}>Back</button>
             </FormLayout>
         </Layout>
     );

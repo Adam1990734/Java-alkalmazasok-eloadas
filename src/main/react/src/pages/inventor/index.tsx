@@ -34,7 +34,7 @@ export default function InventorIndexView({ hasOperations = true }: Props) {
     return (
         <div className="container my-4">
             <div className="d-flex justify-content-between align-items-center mb-3">
-                <h2 className="m-0">Feltalálók listája</h2>
+                <h2 className="m-0">Inventors</h2>
                 <button
                     className="btn btn-success"
                     onClick={() => navigate('/crud/inventors/create')}
@@ -43,11 +43,8 @@ export default function InventorIndexView({ hasOperations = true }: Props) {
                 </button>
             </div>
 
-            <Table headerLabels={['name', 'born in', 'died in']} objectToMap={inventors} hasOperations={hasOperations} />
-
-            <div className="d-flex justify-content-center mt-3">
-                <Pager currentPage={page} pageSetter={setPage} lastPage={lastPage.current} />
-            </div>
+            <Table headerLabels={['Name', 'Born in', 'Died in']} objectToMap={inventors} hasOperations={hasOperations} />
+            <Pager currentPage={page} pageSetter={setPage} lastPage={lastPage.current} />
         </div>
     );
 }

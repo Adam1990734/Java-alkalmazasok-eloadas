@@ -20,28 +20,26 @@ function App() {
 
     return (
         <div className="container my-4">
-            {/* Kezdőlapi/Navigációs gombok */}
             <div className="card p-3 mb-4 shadow-sm bg-white">
                 <div className="d-flex justify-content-between align-items-center">
-                    <h1 className="h4 m-0 text-primary fw-bold">CRUD Kezelőfelület</h1>
+                    <h1 className="h4 m-0 text-primary fw-bold">CRUD</h1>
                     <div className="btn-group">
                         <button
                             className="btn btn-primary"
                             onClick={() => navigate('/crud/inventors')}
                         >
-                            Feltalálók (Inventors)
+                            Inventors
                         </button>
                         <button
                             className="btn btn-outline-secondary"
+                            disabled={true}
                             onClick={() => navigate('/crud/inventions')}
                         >
-                            Találmányok (Inventions)
+                            Inventions - Not Available
                         </button>
                     </div>
                 </div>
             </div>
-
-            {/* A jelenlegi feltalálók nézet */}
             <InventorIndexView />
         </div>
     );

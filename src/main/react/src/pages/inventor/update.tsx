@@ -3,8 +3,8 @@ import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import {useNavigate, useParams} from "react-router-dom";
 import InventionSelector from "../../components/invention/invention-selector.tsx";
-import Layout from "../../layout.tsx";
-import FormLayout from "../../formLayout.tsx";
+import Layout from "../../layouts/layout.tsx";
+import FormLayout from "../../layouts/formLayout.tsx";
 
 export default function InventorUpdateView() {
     const { id } = useParams();
@@ -41,61 +41,103 @@ export default function InventorUpdateView() {
 
     return (
         <Layout>
-            {result === 204 && (
-                <>
-                    <span>Successfully update!</span>
-                </>
-            )}
-            <FormLayout name={"Update"}>
+            <FormLayout name="Update Inventor">
+                {result === 204 && (
+                    <div className="alert alert-success">
+                        The inventor was updated successfully.
+                    </div>
+                )}
                 <form
                     onSubmit={async (e) => {
                         e.preventDefault();
                         await onSubmit();
                     }}
                 >
-                    <div className={"mb-3"}>
-                        <label className={"form-label"}>Name: </label> <br/>
-                        <input
-                            type={'text'}
-                            className={"form-control"}
-                            defaultValue={inventor?.name ?? ''}
-                            onChange={(e) => (inventorRef.current.name = e.currentTarget.value)}
-                            required={true}
-                        />
-                    </div>
-                    <div className={"mb-3"}>
-                        <label className={"form-label"}>Born At: </label> <br/>
-                        <input
-                            type={'number'}
-                            className={"form-control"}
-                            defaultValue={inventor?.bornat ?? ''}
-                            onChange={(e) => (inventorRef.current.bornat = Number(e.currentTarget.value))}
-                            required={true}
-                        />
-                    </div>
-                    <div className={"mb-3"}>
-                        <label className={"form-label"}>Died At: </label> <br/>
-                        <input
-                            type={'number'}
-                            className={"form-control"}
-                            defaultValue={inventor?.diedat ?? ''}
-                            onChange={(e) => (inventorRef.current.diedat = isNaN(e.currentTarget.valueAsNumber) ? null : e.currentTarget.valueAsNumber)}
-                            required={false}
-                        />
-                    </div>
-                    <label className={"form-label"}>Inventions: </label> <br/>
-                    <InventionSelector
-                        value={selectedInventions}
-                        onChange={(items) => {
-                            setSelectedInventions(items);
+                    <div className="mb-3">
+                        <label className="form-label fw-semibold">
+                            Name
+                        </label>
 
-                            inventorRef.current.inventions =
-                                items.map(item => item.id);
-                        }}
-                    />
-                    <button className={"btn btn-primary"} type={'submit'}>Save</button>
+                        <input
+                            type="text"
+                            className="form-control"
+                            defaultValue={inventor?.name ?? ""}
+                            required
+                            onChange={(e) =>
+                                (inventorRef.current.name =
+                                    e.currentTarget.value)
+                            }
+                        />
+                    </div>
+
+                    <div className="mb-3">
+                        <label className="form-label fw-semibold">
+                            Born At
+                        </label>
+
+                        <input
+                            type="number"
+                            className="form-control"
+                            defaultValue={inventor?.bornat ?? ""}
+                            required
+                            onChange={(e) =>
+                                (inventorRef.current.bornat =
+                                    Number(e.currentTarget.value))
+                            }
+                        />
+                    </div>
+
+                    <div className="mb-3">
+                        <label className="form-label fw-semibold">
+                            Died At
+                        </label>
+
+                        <input
+                            type="number"
+                            className="form-control"
+                            defaultValue={inventor?.diedat ?? ""}
+                            onChange={(e) =>
+                                (inventorRef.current.diedat =
+                                    isNaN(e.currentTarget.valueAsNumber)
+                                        ? null
+                                        : e.currentTarget.valueAsNumber)
+                            }
+                        />
+                    </div>
+
+                    <div className="mb-4">
+                        <label className="form-label fw-semibold">
+                            Inventions
+                        </label>
+
+                        <InventionSelector
+                            value={selectedInventions}
+                            onChange={(items) => {
+                                setSelectedInventions(items);
+
+                                inventorRef.current.inventions =
+                                    items.map(item => item.id);
+                            }}
+                        />
+                    </div>
+
+                    <div className="d-flex justify-content-between">
+                        <button
+                            type="button"
+                            className="btn btn-outline-secondary"
+                            onClick={() => navigate("/crud/inventors")}
+                        >
+                            Back
+                        </button>
+
+                        <button
+                            className="btn btn-primary"
+                            type="submit"
+                        >
+                            Save Changes
+                        </button>
+                    </div>
                 </form>
-                <button className={"btn btn-secondary"} onClick={() => navigate(`/crud/inventors`)}>Back</button>
             </FormLayout>
         </Layout>
     );

@@ -6,19 +6,19 @@ type Props = {
 
 export default function Pager({ currentPage, lastPage, pageSetter }: Props) {
     return <>
-        { lastPage > currentPage ?
-            <button
-                className={"secondary-btn"}
-                onClick={() => pageSetter(currentPage + 1)}
-            >Next</button>
-            :
-            <></>
-        }
         { currentPage > 1 ?
             <button
                 className={"secondary-btn"}
                 onClick={() => pageSetter(currentPage - 1)}
             >Back</button>
+            :
+            <></>
+        }
+        { lastPage > currentPage ?
+            <button
+                className={"secondary-btn"}
+                onClick={() => pageSetter(currentPage + 1)}
+            >Next</button>
             :
             <></>
         }

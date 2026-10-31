@@ -57,51 +57,72 @@ export default function InventionSelector({
     };
 
     return (
-        <div className={"mb-3"}>
-            <input
-                type="text"
-                className={"form-control"}
-                maxLength={40}
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="Invention search..."
-            />
+        <div className="card border-0 shadow-sm">
+            <div className="card-body">
+                <label className="form-label fw-semibold">
+                    Inventions
+                </label>
 
-            {suggestions.length > 0 && (
-                <ul className="list-group">
-                    {suggestions.map(invention => (
-                        <li className="list-group-item list-group-item-action"
-                            key={invention.id}
-                            onClick={() => addInvention(invention)}
-                            style={{
-                                cursor: "pointer"
-                            }}
-                        >
-                            {invention.name}
-                        </li>
-                    ))}
-                </ul>
-            )}
+                <input
+                    type="text"
+                    className="form-control"
+                    maxLength={40}
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    placeholder="Search inventions..."
+                />
 
-            {value.length > 0 && (
-                <div>
-                    <h4>Selected inventions</h4>
-
-                    {value.map(invention => (
-                        <div key={invention.id}>
-                            {invention.name}
-
-                            <button
-                                className={"btn btn-secondary"}
-                                type="button"
-                                onClick={() => removeInvention(invention.id)}
+                {suggestions.length > 0 && (
+                    <ul className="list-group mt-2">
+                        {suggestions.map((invention) => (
+                            <li
+                                key={invention.id}
+                                className="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                                onClick={() => addInvention(invention)}
+                                style={{ cursor: "pointer" }}
                             >
-                                X
-                            </button>
+                                <span>{invention.name}</span>
+
+                                <span className="badge text-bg-primary">
+                            Add
+                        </span>
+                            </li>
+                        ))}
+                    </ul>
+                )}
+
+                {value.length > 0 && (
+                    <>
+                        <hr />
+
+                        <div className="mb-2">
+                    <span className="fw-semibold">
+                        Selected inventions
+                    </span>
                         </div>
-                    ))}
-                </div>
-            )}
+
+                        <div className="d-flex flex-wrap gap-2">
+                            {value.map((invention) => (
+                                <span
+                                    key={invention.id}
+                                    className="badge text-bg-success fs-6 d-inline-flex align-items-center"
+                                >
+                            {invention.name}
+
+                                    <button
+                                        type="button"
+                                        className="btn-close btn-close-white ms-2"
+                                        aria-label="Remove"
+                                        onClick={() =>
+                                            removeInvention(invention.id)
+                                        }
+                                    />
+                        </span>
+                            ))}
+                        </div>
+                    </>
+                )}
+            </div>
         </div>
     );
 }

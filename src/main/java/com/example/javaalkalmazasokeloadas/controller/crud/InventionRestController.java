@@ -29,6 +29,8 @@ public class InventionRestController {
     }
     @GetMapping("/{id}")
     public ResponseEntity<InventionResponseDto> details(@PathVariable Long id) {
+        if(!inventionService.Exist(id))
+            return ResponseEntity.notFound().build();
         InventionResponseDto invention = inventionService.findById(id);
         return ResponseEntity.ok(invention);
     }
@@ -40,11 +42,15 @@ public class InventionRestController {
     }
     @PutMapping("/{id}")
     public ResponseEntity<InventionResponseDto> update(@PathVariable Long id, @RequestBody InventionRequestDto dto) {
+        if(!inventionService.Exist(id))
+            return ResponseEntity.notFound().build();
         InventionResponseDto updated = inventionService.update(id, dto);
         return ResponseEntity.noContent().build();
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
+        if(!inventionService.Exist(id))
+            return ResponseEntity.notFound().build();
         inventionService.delete(id);
         return ResponseEntity.ok().build();
     }
