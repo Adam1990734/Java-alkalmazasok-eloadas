@@ -11,7 +11,7 @@ function App() {
 export default App
 */
 
-import './App.css'
+// import './App.css'
 import InventorIndexView from "./pages/inventor";
 import { useNavigate } from "react-router-dom";
 
