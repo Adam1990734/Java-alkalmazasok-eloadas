@@ -3,6 +3,7 @@ import type { InventorResponse, Inventor } from '../../types/types';
 import axios from 'axios';
 import InventorDetails from "../../components/inventor/inventor-details.tsx";
 import {useNavigate, useParams} from 'react-router-dom';
+import Layout from "../../layout.tsx";
 
 export default function InventorDetailsView() {
     const { id } = useParams();
@@ -22,9 +23,9 @@ export default function InventorDetailsView() {
     }, []);
 
     return (
-        <>
+        <Layout>
             {inventor ? <InventorDetails inventor={inventor} isComplex={true} /> : <span>Hiba</span>}
-            <button onClick={() => navigate(`/crud/inventors`)}>Back</button>
-        </>
+            <button className={"btn btn-secondary"} onClick={() => navigate(`/crud/inventors`)}>Back</button>
+        </Layout>
     );
 }

@@ -57,19 +57,20 @@ export default function InventionSelector({
     };
 
     return (
-        <div>
+        <div className={"mb-3"}>
             <input
                 type="text"
+                className={"form-control"}
                 maxLength={40}
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Inventor search..."
+                placeholder="Invention search..."
             />
 
             {suggestions.length > 0 && (
-                <ul>
+                <ul className="list-group">
                     {suggestions.map(invention => (
-                        <li
+                        <li className="list-group-item list-group-item-action"
                             key={invention.id}
                             onClick={() => addInvention(invention)}
                             style={{
@@ -91,6 +92,7 @@ export default function InventionSelector({
                             {invention.name}
 
                             <button
+                                className={"btn btn-secondary"}
                                 type="button"
                                 onClick={() => removeInvention(invention.id)}
                             >

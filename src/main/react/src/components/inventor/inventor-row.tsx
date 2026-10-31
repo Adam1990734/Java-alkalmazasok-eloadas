@@ -27,9 +27,9 @@ export default function InventorRow({ inventor, isComplex, hasOperations = false
                     </td>
                     {hasOperations && (
                         <td>
-                            <button onClick={() => navigate(`/crud/inventors/${inventor.id}`)}>Details</button>
-                            <button onClick={() => navigate(`/crud/inventors/update/${inventor.id}`)}>Update</button>
-                            <button onClick={() => navigate(`/crud/inventors/delete/${inventor.id}`)}>Delete</button>
+                            <button className={"secondary-btn"} onClick={() => navigate(`/crud/inventors/${inventor.id}`)}>Details</button>
+                            <button className={"secondary-btn"} onClick={() => navigate(`/crud/inventors/update/${inventor.id}`)}>Update</button>
+                            <button className={"secondary-btn"} onClick={() => navigate(`/crud/inventors/delete/${inventor.id}`)}>Delete</button>
                         </td>
                     )}
                 </tr>
@@ -40,9 +40,9 @@ export default function InventorRow({ inventor, isComplex, hasOperations = false
                     <td>{inventor.diedat ? inventor.diedat : '-'}</td>
                     { hasOperations &&
                         <td>
-                            <button onClick={() => navigate(`/crud/inventors/${inventor.id}`)}>Details</button>
-                            <button onClick={() => navigate(`/crud/inventors/update/${inventor.id}`)}>Update</button>
-                            <button onClick={() => navigate(`/crud/inventors/delete/${inventor.id}`)}>Delete</button>
+                            <button className={"secondary-btn"} onClick={() => navigate(`/crud/inventors/${inventor.id}`)}>Details</button>
+                            <button className={"secondary-btn"} onClick={() => navigate(`/crud/inventors/update/${inventor.id}`)}>Update</button>
+                            <button className={"secondary-btn"} onClick={() => navigate(`/crud/inventors/delete/${inventor.id}`)}>Delete</button>
                         </td>
                     }
                 </tr>
