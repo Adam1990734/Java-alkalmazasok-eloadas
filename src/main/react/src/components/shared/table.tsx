@@ -13,15 +13,15 @@ type HeaderProps = {
     hasOperations?: boolean;
 };
 
-function Header({ headerLabels, hasOperations: hasOperations = false }: HeaderProps) {
+function Header({ headerLabels, hasOperations = false }: HeaderProps) {
     return (
         <thead>
-            <tr>
-                {headerLabels.map((label, id) => (
-                    <th key={id}>{label}</th>
-                ))}
-                {hasOperations && <th>Operations</th>}
-            </tr>
+        <tr>
+            {headerLabels.map((label, id) => (
+                <th key={id}>{label}</th>
+            ))}
+            {hasOperations && <th>Operations</th>}
+        </tr>
         </thead>
     );
 }
@@ -32,7 +32,8 @@ type BodyProps = {
 };
 
 function Body({ elements, hasOperations = false } : BodyProps) {
-    return <tbody>
+    return (
+        <tbody>
         {
             elements.map((obj, id) => {
                 switch (obj.type) {
@@ -43,12 +44,13 @@ function Body({ elements, hasOperations = false } : BodyProps) {
                 }
             })
         }
-    </tbody>
+        </tbody>
+    );
 }
 
 export default function Table({ objectToMap, headerLabels, hasOperations = false }: Props) {
     return (
-        <table>
+        <table className="table table-striped table-hover align-middle">
             <Header headerLabels={headerLabels} hasOperations={hasOperations} />
             <Body elements={objectToMap} hasOperations={hasOperations} />
         </table>
